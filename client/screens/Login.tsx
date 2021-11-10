@@ -143,7 +143,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     width: 120,
     marginTop: 10,
-
     borderRadius: 20,
   },
 

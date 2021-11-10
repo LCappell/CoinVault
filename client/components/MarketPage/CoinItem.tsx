@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
   listItem: {
     margin: 10,
     color: 'white',
-    fontFamily: 'Chivo_400Regular',
+    fontFamily: 'Chivo_700Bold',
     letterSpacing: 1,
   },
 });
