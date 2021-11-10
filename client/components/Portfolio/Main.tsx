@@ -5,12 +5,12 @@ import {
   View,
   TouchableOpacity,
   SafeAreaView,
-  ScrollView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { auth } from '../../firebase';
 import CoinPie from './CoinPie';
 import Header from './Header';
+import UserInput from './UserInput';
 
 const Main = () => {
   // Username for header
@@ -28,7 +28,10 @@ const Main = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Header formatEmail={formatEmail} />
-      <CoinPie />
+      <View style={styles.coinDataArea}>
+        <CoinPie />
+        <UserInput />
+      </View>
       <TouchableOpacity style={styles.signOutArea} onPress={handleSignOut}>
         <Text style={styles.text}>Sign out</Text>
       </TouchableOpacity>
@@ -40,13 +43,13 @@ export default Main;
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     flexDirection: 'column',
     flex: 1,
     backgroundColor: '#000',
-    height: '90%',
   },
+  coinDataArea: { top: 80 },
 
   title: {
     fontSize: 24,

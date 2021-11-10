@@ -5,6 +5,10 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+// REDUX IMPORTS
+import { store } from './redux/Store';
+import { Provider } from 'react-redux';
+
 import AppLoading from 'expo-app-loading';
 
 import {
@@ -15,7 +19,6 @@ import {
   Chivo_400Regular_Italic,
   Chivo_700Bold,
   Chivo_700Bold_Italic,
-  
 } from '@expo-google-fonts/chivo';
 import TabIcon from './components/TabIcon';
 import Icons from './constants/Icons';
@@ -36,86 +39,87 @@ const App: FC = () => {
     Chivo_400Regular_Italic,
     Chivo_700Bold,
     Chivo_700Bold_Italic,
-    
   });
   if (!fontsLoaded) return <AppLoading />;
 
   // Bottom Tab Navigation
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName='Portfolio'
-        // Tab Styling
-        screenOptions={({ route }) => ({
-          tabBarShowLabel: false,
-          tabBarStyle: {
-            position: 'absolute',
-            paddingTop: 10,
-            paddingBottom: 10,
-            bottom: 20,
-            right: 10,
-            left: 10,
-            borderRadius: 100,
-            height: 70,
-            justifyContent: 'center',
-            alignItems: 'center',
+    <Provider store={store}>
+      <NavigationContainer>
+        <Tab.Navigator
+          initialRouteName='Portfolio'
+          // Tab Styling
+          screenOptions={({ route }) => ({
+            tabBarShowLabel: false,
+            tabBarStyle: {
+              position: 'absolute',
+              paddingTop: 10,
+              paddingBottom: 10,
+              bottom: 20,
+              right: 10,
+              left: 10,
+              borderRadius: 100,
+              height: 70,
+              justifyContent: 'center',
+              alignItems: 'center',
 
-            borderTopWidth: 0,
-            backgroundColor: '#121212',
-            elevation: 8,
-          },
+              borderTopWidth: 0,
+              backgroundColor: '#121212',
+              elevation: 8,
+            },
 
-          tabBarLabelStyle: {
-            fontSize: 13,
-            fontFamily: 'Chivo_400Regular',
-            letterSpacing: 1.5,
-            paddingBottom: 7,
-          },
+            tabBarLabelStyle: {
+              fontSize: 13,
+              fontFamily: 'Chivo_400Regular',
+              letterSpacing: 1.5,
+              paddingBottom: 7,
+            },
 
-          // Icons for Nav Bar
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName: string | any;
+            // Icons for Nav Bar
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName: string | any;
 
-            if (route.name === 'Portfolio') {
-              iconName = focused ? 'ios-pie-chart' : 'ios-pie-chart-outline';
-            } else if (route.name === 'Market') {
-              return <TabIcon icon={focused ? Icons.barFilled : Icons.bar} />;
-            } else if (route.name === 'News') {
-              iconName = focused ? 'ios-newspaper' : 'ios-newspaper-outline';
-            }
+              if (route.name === 'Portfolio') {
+                iconName = focused ? 'ios-pie-chart' : 'ios-pie-chart-outline';
+              } else if (route.name === 'Market') {
+                return <TabIcon icon={focused ? Icons.barFilled : Icons.bar} />;
+              } else if (route.name === 'News') {
+                iconName = focused ? 'ios-newspaper' : 'ios-newspaper-outline';
+              }
 
-            // You can return any component that you like here!
-            return (
-              <Ionicons
-                style={styles.iconItem}
-                name={iconName}
-                size={30}
-                color={color}
-              />
-            );
-          },
-          tabBarActiveTintColor: '#fff',
-          tabBarInactiveTintColor: 'white',
-        })}
-      >
-        <Tab.Screen
-          name='Market'
-          component={Market}
-          options={{ headerShown: false }}
-        />
-        <Tab.Screen
-          name='Portfolio'
-          component={Portfolio}
-          options={{ headerShown: false }}
-        />
+              // You can return any component that you like here!
+              return (
+                <Ionicons
+                  style={styles.iconItem}
+                  name={iconName}
+                  size={30}
+                  color={color}
+                />
+              );
+            },
+            tabBarActiveTintColor: '#fff',
+            tabBarInactiveTintColor: 'white',
+          })}
+        >
+          <Tab.Screen
+            name='Market'
+            component={Market}
+            options={{ headerShown: false }}
+          />
+          <Tab.Screen
+            name='Portfolio'
+            component={Portfolio}
+            options={{ headerShown: false }}
+          />
 
-        <Tab.Screen
-          name='News'
-          component={News}
-          options={{ headerShown: false }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+          <Tab.Screen
+            name='News'
+            component={News}
+            options={{ headerShown: false }}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 };
 

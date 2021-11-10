@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { VictoryPie, VictoryChart, VictoryTheme } from 'victory-native';
+import { VictoryPie } from 'victory-native';
 
 export default class App extends React.Component {
   render() {
@@ -39,8 +39,5 @@ export default class App extends React.Component {
   }
 }
 const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    top: 180,
-  },
+  container: {},
 });
