@@ -3,9 +3,9 @@ import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 
 const MarketLoading = () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Text>Market Data Loading...</Text>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -13,7 +13,7 @@ export default MarketLoading;
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: 'blue',
+    flex: 1,
   },
 });

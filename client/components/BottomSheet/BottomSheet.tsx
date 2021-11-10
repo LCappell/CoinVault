@@ -135,7 +135,6 @@ const styles = StyleSheet.create({
   dynamicData: {
     color: 'white',
     backgroundColor: '#60A3D9',
-
     borderRadius: 50,
     width: 150,
     textAlign: 'center',

@@ -63,8 +63,7 @@ const CoinList: FC<coinData> = ({
             <RefreshControl
               refreshing={refreshing}
               onRefresh={onRefresh}
-              style={styles.loader}
-              title='Loading Coins...'
+              tintColor='#fff'
             />
           }
         />
@@ -95,8 +94,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 100,
   },
-
-  loader: { backgroundColor: '#BFD7ED' },
 
   flatListItem: {
     fontFamily: 'Chivo_400Regular',

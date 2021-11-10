@@ -4,11 +4,18 @@ import { NavigationContainer } from '@react-navigation/native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import AppLoading from 'expo-app-loading';
+
 import {
   useFonts,
+  Chivo_300Light,
+  Chivo_300Light_Italic,
   Chivo_400Regular,
+  Chivo_400Regular_Italic,
   Chivo_700Bold,
+  Chivo_700Bold_Italic,
+  
 } from '@expo-google-fonts/chivo';
 import TabIcon from './components/TabIcon';
 import Icons from './constants/Icons';
@@ -23,8 +30,13 @@ const Tab = createBottomTabNavigator();
 
 const App: FC = () => {
   let [fontsLoaded] = useFonts({
+    Chivo_300Light,
+    Chivo_300Light_Italic,
     Chivo_400Regular,
+    Chivo_400Regular_Italic,
     Chivo_700Bold,
+    Chivo_700Bold_Italic,
+    
   });
   if (!fontsLoaded) return <AppLoading />;
 
@@ -32,10 +44,10 @@ const App: FC = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        tabBarOptions={{ showLabel: false }}
         initialRouteName='Portfolio'
         // Tab Styling
         screenOptions={({ route }) => ({
+          tabBarShowLabel: false,
           tabBarStyle: {
             position: 'absolute',
             paddingTop: 10,
@@ -112,8 +124,5 @@ export default App;
 const styles = StyleSheet.create({
   background: {},
 
-  iconItem: {
-    // marginBottom: 15,
-    // paddingBottom: 20,
-  },
+  iconItem: {},
 });

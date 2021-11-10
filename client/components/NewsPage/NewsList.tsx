@@ -47,8 +47,7 @@ const NewsList = ({
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
-            style={styles.loader}
-            title='Loading News...'
+            tintColor='#fff'
           />
         }
       />
@@ -58,8 +57,4 @@ const NewsList = ({
 
 export default NewsList;
 
-const styles = StyleSheet.create({
-  loader: {
-    backgroundColor: '#BFD7ED',
-  },
-});
+const styles = StyleSheet.create({});
