@@ -91,7 +91,6 @@ const Login: FC = () => {
           style={styles.userInput}
           placeholder='Password...'
           keyboardAppearance='dark'
-          keyboardType='numeric'
           placeholderTextColor='#fff'
           secureTextEntry={true}
         />
