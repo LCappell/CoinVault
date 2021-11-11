@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,15 +6,14 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  Animated,
 } from 'react-native';
 
-import DateTimePicker from '@react-native-community/datetimepicker';
+import axios from 'axios';
 
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { saveCoinData } from '../../redux/CoinInputData';
 import { RootState } from '../../redux/Store';
-import { useSelector, useDispatch } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
 
 const UserInput = () => {
   const dispatch = useDispatch();
@@ -27,7 +26,9 @@ const UserInput = () => {
     const currentDate = selectedDate || date;
     setDate(currentDate);
   };
-
+  const coinAmount = useSelector(
+    (state: RootState) => state.CoinInputData.amount
+  );
   const addCoinData = () => {
     console.log(`Adding ${userAmount}`);
     dispatch(
@@ -38,6 +39,17 @@ const UserInput = () => {
         openData: date,
       })
     );
+
+    fetch('http://10.10.22.28:4000', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ date, boughtPrice, userAmount, userCoin }),
+    });
+
+    setUserAmount('');
+    setUserCoin('');
+    setDate(new Date());
+    setBoughtPrice('');
   };
 
   return (

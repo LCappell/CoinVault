@@ -10,7 +10,6 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { RootState } from '../../redux/Store';
 import { useSelector } from 'react-redux';
-import { ScrollView } from 'react-native-gesture-handler';
 import DetailsItem from './DetailsItem';
 import TabIcon from '../TabIcon';
 import Icons from '../../constants/Icons';
@@ -20,8 +19,8 @@ const DetailsPage = () => {
   const coinAmount = useSelector(
     (state: RootState) => state.CoinInputData.amount
   );
-
   console.log(coinAmount);
+
   const renderItem = useCallback(({ item }) => <DetailsItem item={item} />, []);
   const keyExtractor = useCallback((item) => item.amount.toString(), []);
 
