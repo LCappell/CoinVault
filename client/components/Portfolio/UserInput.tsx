@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,8 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  ScrollView,
-  KeyboardAvoidingView,
+  Animated,
 } from 'react-native';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -16,15 +15,18 @@ import { saveCoinData } from '../../redux/CoinInputData';
 import { RootState } from '../../redux/Store';
 import { useSelector, useDispatch } from 'react-redux';
 
+
 const UserInput = () => {
   const dispatch = useDispatch();
+  const [date, setDate] = useState(new Date());
   const [boughtPrice, setBoughtPrice] = useState('');
   const [userAmount, setUserAmount] = useState('');
   const [userCoin, setUserCoin] = useState('');
 
-  const coinAmount = useSelector(
-    (state: RootState) => state.CoinInputData.amount
-  );
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setDate(currentDate);
+  };
 
   const addCoinData = () => {
     console.log(`Adding ${userAmount}`);
@@ -33,24 +35,36 @@ const UserInput = () => {
         amount: userAmount,
         type: userCoin,
         coinPrice: boughtPrice,
+        openData: date,
       })
     );
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <TextInput
-        placeholder='Input a coin...'
-        placeholderTextColor='#fff'
-        value={userCoin}
-        style={styles.selector}
-        onChangeText={(val) => setUserCoin(val)}
-        keyboardAppearance='dark'
-      />
-
       <View style={styles.row}>
         <TextInput
-          placeholder='Price bought at...'
+          placeholder='Input a coin...'
+          placeholderTextColor='#fff'
+          value={userCoin}
+          style={styles.selector}
+          onChangeText={(val) => setUserCoin(val)}
+          keyboardAppearance='dark'
+        />
+        <View style={styles.dateArea}>
+          <DateTimePicker
+            testID='dateTimePicker'
+            value={date}
+            is24Hour={true}
+            mode='date'
+            display='default'
+            onChange={onChange}
+            style={styles.datepicker}
+          />
+        </View>
+
+        <TextInput
+          placeholder='Open price...'
           placeholderTextColor='#fff'
           value={boughtPrice}
           style={styles.input}
@@ -85,8 +99,10 @@ const styles = StyleSheet.create({
     marginBottom: 200,
   },
 
+  dateArea: {},
+
   selector: {
-    width: 300,
+    width: 150,
     height: 40,
     fontSize: 14,
     paddingHorizontal: 12,
@@ -112,6 +128,7 @@ const styles = StyleSheet.create({
     elevation: 3,
     padding: 0,
   },
+
   btntext: {
     fontSize: 16,
     fontFamily: 'Chivo_400Regular',
@@ -125,6 +142,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
     justifyContent: 'center',
+    marginBottom: 50,
   },
 
   datepicker: {
@@ -136,7 +154,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     overflow: 'hidden',
     width: 120,
-    marginRight: 20,
+    marginLeft: 20,
   },
 
   text: {

@@ -62,6 +62,8 @@ const Login: FC = () => {
 
         console.log(error);
       });
+      setEmail('')
+      setPassword('')
   };
 
   const progress = useRef(new Animated.Value(0)).current;

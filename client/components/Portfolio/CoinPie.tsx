@@ -36,6 +36,11 @@ const CoinPie = () => {
 
   populateGraph();
 
+  const displayData = () => {
+    if (output.length > 0) return output;
+    return [{ x: 'No data yet...', y: 1 }];
+  };
+
   return (
     <TouchableOpacity onPress={() => console.log('clicked')}>
       <View style={styles.container}>
@@ -47,7 +52,7 @@ const CoinPie = () => {
           innerRadius={100}
           cornerRadius={({ datum }) => datum.y * 0.5}
           colorScale={['tomato', 'orange', 'gold', 'cyan', 'navy']}
-          data={output}
+          data={displayData()}
           animate={{
             duration: 2000,
           }}

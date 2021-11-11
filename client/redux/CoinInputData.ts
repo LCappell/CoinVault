@@ -14,7 +14,7 @@ export const CoinInputData = createSlice({
   reducers: {
     saveCoinData: (state, action: PayloadAction<any>) => {
       state.amount.push(action.payload);
-      // console.log(state.amount);
+      console.log(state.amount);
     },
   },
 });
