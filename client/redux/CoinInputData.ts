@@ -1,34 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface CoinState {
-  amount: any[];
-  date: any[];
-  coin: any[];
+  amount: {}[];
 }
 
 const initialState: CoinState = {
   amount: [],
-  date: [],
-  coin: [],
 };
 
 export const CoinInputData = createSlice({
   name: 'coin-amount',
   initialState,
   reducers: {
-    saveAmount: (state, action: PayloadAction<any>) => {
+    saveCoinData: (state, action: PayloadAction<any>) => {
       state.amount.push(action.payload);
-    },
-    saveDate: (state, action: PayloadAction<any>) => {
-      state.date.push(action.payload);
-    },
-    saveCoin: (state, action: PayloadAction<any>) => {
-      state.amount = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { saveAmount } = CoinInputData.actions;
+export const { saveCoinData } = CoinInputData.actions;
 
 export default CoinInputData.reducer;

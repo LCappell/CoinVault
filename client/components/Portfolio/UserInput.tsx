@@ -9,37 +9,33 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
+
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-import { saveAmount } from '../../redux/CoinInputData';
+import { saveCoinData } from '../../redux/CoinInputData';
 import { RootState } from '../../redux/Store';
 import { useSelector, useDispatch } from 'react-redux';
 
 const UserInput = () => {
   const dispatch = useDispatch();
-  const [date, setDate] = useState(new Date());
-  const [userAmount, setuserAmount] = useState('');
-  // const [userCoin, setuserCoin] = useState('');
+  const [boughtPrice, setBoughtPrice] = useState('');
+  const [userAmount, setUserAmount] = useState('');
+  const [userCoin, setUserCoin] = useState('');
 
   const coinAmount = useSelector(
     (state: RootState) => state.CoinInputData.amount
   );
-  const coinDate = useSelector((state: RootState) => state.CoinInputData.date);
-  const coinType = useSelector((state: RootState) => state.CoinInputData.coin);
+  
 
   const addCoinData = () => {
+    console.log(`Adding ${userAmount}`);
     dispatch(
-      saveAmount({
-        amount: coinAmount,
+      saveCoinData({
+        amount: userAmount,
+        type: userCoin,
+        boughtPrice,
       })
     );
-    console.log(coinAmount);
-  };
-
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    // A(currentDate);
   };
 
   return (
@@ -47,29 +43,27 @@ const UserInput = () => {
       <TextInput
         placeholder='Input a coin...'
         placeholderTextColor='#fff'
-        value={userAmount}
+        value={userCoin}
         style={styles.selector}
-        onChangeText={(val) => setuserAmount(val)}
+        onChangeText={(val) => setUserCoin(val)}
         keyboardAppearance='dark'
       />
 
       <View style={styles.row}>
-        <DateTimePicker
-          testID='dateTimePicker'
-          value={date}
-          mode='date'
-          is24Hour={true}
-          display='default'
-          onChange={onChange}
-          style={styles.datepicker}
-          themeVariant='light'
+        <TextInput
+          placeholder='Pirce bought at...'
+          placeholderTextColor='#fff'
+          value={boughtPrice}
+          style={styles.input}
+          onChangeText={(val) => setBoughtPrice(val)}
+          keyboardAppearance='dark'
         />
         <TextInput
           placeholder='Amount...'
           placeholderTextColor='#fff'
           value={userAmount}
           style={styles.input}
-          onChangeText={(val) => setuserAmount(val)}
+          onChangeText={(val) => setUserAmount(val)}
           keyboardAppearance='dark'
         />
         <View style={styles.btnArea}>
@@ -127,7 +121,7 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   row: {
-    width: 300,
+    width: 400,
     flexWrap: 'wrap',
     flexDirection: 'row',
     justifyContent: 'center',
@@ -153,7 +147,7 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    width: 120,
+    width: 170,
     height: 40,
     fontSize: 14,
     paddingHorizontal: 12,
@@ -163,5 +157,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     paddingRight: 30,
     marginVertical: 15,
+    marginHorizontal: 10,
   },
 });

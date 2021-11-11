@@ -91,6 +91,7 @@ const Login: FC = () => {
           style={styles.userInput}
           placeholder='Password...'
           keyboardAppearance='dark'
+          keyboardType='numeric'
           placeholderTextColor='#fff'
           secureTextEntry={true}
         />
@@ -126,7 +127,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flex: 1,
     backgroundColor: '#000',
-
   },
   formcontainer: { marginBottom: 20 },
 
