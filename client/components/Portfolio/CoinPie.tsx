@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { VictoryPie } from 'victory-native';
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Text,
+  ViewBase,
+} from 'react-native';
+import { VictoryPie, VictoryChart } from 'victory-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { RootState } from '../../redux/Store';
 import { useSelector } from 'react-redux';
 
 const CoinPie = () => {
+  const navigation = useNavigation();
   const coinAmount = useSelector(
     (state: RootState) => state.CoinInputData.amount
   );
@@ -29,31 +37,45 @@ const CoinPie = () => {
   populateGraph();
 
   return (
-    <View style={styles.container}>
-      <VictoryPie
-        labelRadius={({ innerRadius }) => +innerRadius + 20}
-        padAngle={({ datum }) => datum.y * 0.1}
-        padding={{ top: 20, bottom: 60 }}
-        innerRadius={100}
-        cornerRadius={({ datum }) => datum.y * 0.5}
-        colorScale={['tomato', 'orange', 'gold', 'cyan', 'navy']}
-        data={output}
-        animate={{
-          duration: 2000,
-        }}
-        style={{
-          data: {
-            fillOpacity: 0.9,
-            stroke: '#fff',
-            strokeWidth: 3,
-          },
-          labels: {
-            fontSize: 20,
-            fill: '#fff',
-          },
-        }}
-      />
-    </View>
+    <TouchableOpacity onPress={() => console.log('clicked')}>
+      <View style={styles.container}>
+        <Text style={styles.text}> Click on wheel to expand... </Text>
+        <VictoryPie
+          labelRadius={({ innerRadius }) => +innerRadius + 20}
+          padAngle={({ datum }) => datum.y * 0.1}
+          padding={{ top: 20, bottom: 60 }}
+          innerRadius={100}
+          cornerRadius={({ datum }) => datum.y * 0.5}
+          colorScale={['tomato', 'orange', 'gold', 'cyan', 'navy']}
+          data={output}
+          animate={{
+            duration: 2000,
+          }}
+          style={{
+            data: {
+              fillOpacity: 0.9,
+              stroke: '#fff',
+              strokeWidth: 3,
+            },
+            labels: {
+              fontSize: 20,
+              fill: '#fff',
+            },
+          }}
+          events={[
+            {
+              target: 'data',
+              eventHandlers: {
+                onPressIn: () => {
+                  navigation.navigate('Details');
+                },
+                onPressOut: () => {},
+              },
+            },
+          ]}
+        />
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -61,4 +83,6 @@ export default CoinPie;
 
 const styles = StyleSheet.create({
   container: { marginBottom: 0 },
+
+  text: { color: '#fff', textAlign: 'center', opacity: 0.4 },
 });

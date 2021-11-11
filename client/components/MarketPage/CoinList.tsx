@@ -92,6 +92,7 @@ export default CoinList;
 const styles = StyleSheet.create({
   listContainer: {
     justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 100,
   },
 
