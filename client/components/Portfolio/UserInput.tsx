@@ -25,7 +25,6 @@ const UserInput = () => {
   const coinAmount = useSelector(
     (state: RootState) => state.CoinInputData.amount
   );
-  
 
   const addCoinData = () => {
     console.log(`Adding ${userAmount}`);
@@ -33,7 +32,7 @@ const UserInput = () => {
       saveCoinData({
         amount: userAmount,
         type: userCoin,
-        boughtPrice,
+        coinPrice: boughtPrice,
       })
     );
   };
@@ -51,7 +50,7 @@ const UserInput = () => {
 
       <View style={styles.row}>
         <TextInput
-          placeholder='Pirce bought at...'
+          placeholder='Price bought at...'
           placeholderTextColor='#fff'
           value={boughtPrice}
           style={styles.input}
@@ -83,6 +82,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
+    marginBottom: 200,
   },
 
   selector: {

@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    marginBottom: 200,
+    marginBottom: 20,
   },
 
   text: {
