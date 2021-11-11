@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface CoinState {
-  amount: number[];
+  amount: any[];
   date: any[];
   coin: any[];
 }
@@ -18,6 +18,12 @@ export const CoinInputData = createSlice({
   reducers: {
     saveAmount: (state, action: PayloadAction<any>) => {
       state.amount.push(action.payload);
+    },
+    saveDate: (state, action: PayloadAction<any>) => {
+      state.date.push(action.payload);
+    },
+    saveCoin: (state, action: PayloadAction<any>) => {
+      state.amount = action.payload;
     },
   },
 });

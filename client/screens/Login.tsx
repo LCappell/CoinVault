@@ -72,7 +72,7 @@ const Login: FC = () => {
         <Image source={coinImg} style={styles.logo} />
       </View>
 
-      <KeyboardAvoidingView>
+      <KeyboardAvoidingView style={styles.formcontainer}>
         <Text style={styles.text}>{errormsg} </Text>
 
         <TextInput
@@ -90,6 +90,7 @@ const Login: FC = () => {
           value={password}
           style={styles.userInput}
           placeholder='Password...'
+          keyboardAppearance='dark'
           placeholderTextColor='#fff'
           secureTextEntry={true}
         />
@@ -125,8 +126,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flex: 1,
     backgroundColor: '#000',
-    height: '90%',
+
   },
+  formcontainer: { marginBottom: 20 },
 
   buttonArea: {
     justifyContent: 'center',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, SafeAreaView } from 'react-native';
 
 const Header = ({ formatEmail }) => {
   return (
@@ -13,15 +13,14 @@ export default Header;
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#fff',
-    position: 'absolute',
-    top: 60,
-    width: 300,
-    borderRadius: 20,
-    marginBottom: 0,
+    // position: 'absolute',
+    // top: 10,
+    // width: 250,
+    // borderRadius: 40,
+    // backgroundColor: 'blue',
   },
   username: {
-    color: '#000',
+    color: '#fff',
     textAlign: 'center',
     paddingVertical: 15,
     letterSpacing: 2,

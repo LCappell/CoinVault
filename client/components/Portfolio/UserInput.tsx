@@ -7,36 +7,53 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
+  KeyboardAvoidingView,
 } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
+import { saveAmount } from '../../redux/CoinInputData';
 import { RootState } from '../../redux/Store';
 import { useSelector, useDispatch } from 'react-redux';
 
 const UserInput = () => {
   const dispatch = useDispatch();
   const [date, setDate] = useState(new Date());
+  const [userAmount, setuserAmount] = useState('');
+  // const [userCoin, setuserCoin] = useState('');
+
   const coinAmount = useSelector(
     (state: RootState) => state.CoinInputData.amount
   );
+  const coinDate = useSelector((state: RootState) => state.CoinInputData.date);
+  const coinType = useSelector((state: RootState) => state.CoinInputData.coin);
+
+  const addCoinData = () => {
+    dispatch(
+      saveAmount({
+        amount: coinAmount,
+      })
+    );
+    console.log(coinAmount);
+  };
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
-    setDate(currentDate);
+    // A(currentDate);
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.formArea}>
-        <Text style={styles.text}>Add to your Portfolio here...</Text>
-        <RNPickerSelect
-          placeholder={{ label: 'Select a coin...', value: null }}
-          onValueChange={(value) => console.log(value)}
-          items={[{ label: 'JavaScript', value: 'JavaScript' }]}
-          style={pickerStyles}
-        />
+      <TextInput
+        placeholder='Input a coin...'
+        placeholderTextColor='#fff'
+        value={userAmount}
+        style={styles.selector}
+        onChangeText={(val) => setuserAmount(val)}
+        keyboardAppearance='dark'
+      />
 
+      <View style={styles.row}>
         <DateTimePicker
           testID='dateTimePicker'
           value={date}
@@ -50,14 +67,17 @@ const UserInput = () => {
         <TextInput
           placeholder='Amount...'
           placeholderTextColor='#fff'
+          value={userAmount}
           style={styles.input}
+          onChangeText={(val) => setuserAmount(val)}
+          keyboardAppearance='dark'
         />
         <View style={styles.btnArea}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity onPress={addCoinData} style={styles.button}>
             <Text style={styles.btntext}>Add Data</Text>
           </TouchableOpacity>
         </View>
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };
@@ -68,10 +88,26 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'column',
+    flex: 1,
   },
 
-  btnArea: { justifyContent: 'center', alignItems: 'center' },
+  selector: {
+    width: 300,
+    height: 40,
+    fontSize: 14,
+    paddingHorizontal: 12,
+    borderWidth: 2,
+    borderColor: '#fff',
+    borderRadius: 8,
+    color: '#fff',
+    paddingRight: 30,
+    marginVertical: 15,
+  },
+
+  btnArea: {
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
 
   button: {
     alignItems: 'center',
@@ -80,14 +116,21 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: 100,
     elevation: 3,
+    padding: 0,
   },
   btntext: {
     fontSize: 16,
-    fontFamily: 'Chivo_700Bold',
+    fontFamily: 'Chivo_400Regular',
     lineHeight: 21,
     fontWeight: 'bold',
     letterSpacing: 0.25,
     color: '#000',
+  },
+  row: {
+    width: 300,
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 
   datepicker: {
@@ -98,9 +141,9 @@ const styles = StyleSheet.create({
     color: '#fff',
     backgroundColor: '#fff',
     overflow: 'hidden',
+    width: 120,
+    marginRight: 20,
   },
-
-  formArea: {},
 
   text: {
     textAlign: 'center',
@@ -110,40 +153,15 @@ const styles = StyleSheet.create({
   },
 
   input: {
+    width: 120,
+    height: 40,
     fontSize: 14,
-    paddingVertical: 10,
     paddingHorizontal: 12,
     borderWidth: 2,
     borderColor: '#fff',
     borderRadius: 8,
     color: '#fff',
-    paddingRight: 30, //
+    paddingRight: 30,
     marginVertical: 15,
-  },
-});
-
-// STYLING FOR DATES
-const pickerStyles = StyleSheet.create({
-  inputIOS: {
-    fontSize: 14,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    borderWidth: 2,
-
-    borderColor: '#fff',
-    borderRadius: 8,
-    color: '#fff',
-    marginTop: 20,
-    paddingRight: 30, // to ensure the text is never behind the icon
-  },
-  inputAndroid: {
-    fontSize: 14,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderWidth: 1,
-    borderColor: 'blue',
-    borderRadius: 8,
-    color: '#fff',
-    paddingRight: 30, // to ensure the text is never behind the icon
   },
 });
