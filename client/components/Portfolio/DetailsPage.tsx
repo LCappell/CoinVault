@@ -14,12 +14,12 @@ import DetailsItem from './DetailsItem';
 import TabIcon from '../TabIcon';
 import Icons from '../../constants/Icons';
 
-const DetailsPage = () => {
+const DetailsPage = ({ output }) => {
   const navigation = useNavigation();
   const coinAmount = useSelector(
     (state: RootState) => state.CoinInputData.amount
   );
-  console.log(coinAmount);
+  // console.log(coinAmount.forEach((item) => console.log(item)));
 
   const renderItem = useCallback(({ item }) => <DetailsItem item={item} />, []);
   const keyExtractor = useCallback((item) => item.amount.toString(), []);
