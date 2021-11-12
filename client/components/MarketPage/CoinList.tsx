@@ -63,7 +63,7 @@ const CoinList: FC<coinData> = ({
             <RefreshControl
               refreshing={refreshing}
               onRefresh={onRefresh}
-              tintColor='#fff'
+              tintColor='#cdebf9'
             />
           }
         />

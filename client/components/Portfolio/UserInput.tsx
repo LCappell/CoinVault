@@ -8,8 +8,6 @@ import {
   View,
 } from 'react-native';
 
-import axios from 'axios';
-
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { saveCoinData } from '../../redux/CoinInputData';
 import { RootState } from '../../redux/Store';
@@ -18,7 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import TabIcon2 from '../../components/TabIcon2';
 import Icons from '../../constants/Icons';
 
-const UserInput = () => {
+const UserInput = ({ coinValues }) => {
   const dispatch = useDispatch();
   const [date, setDate] = useState(new Date());
   const [boughtPrice, setBoughtPrice] = useState('');
@@ -109,21 +107,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    marginBottom: 170,
   },
 
   dateArea: {},
 
   selector: {
-    width: 150,
-    height: 40,
-    fontSize: 17,
+    width: 170,
+    height: 50,
+    fontSize: 18,
 
     paddingHorizontal: 12,
     borderWidth: 2,
     borderColor: '#cdebf9',
     borderRadius: 8,
     color: '#cdebf9',
+    fontFamily: 'Chivo_400Regular',
     paddingRight: 30,
     marginVertical: 15,
   },
@@ -156,19 +154,19 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 50,
   },
 
   datepicker: {
     borderWidth: 2,
     borderColor: '#cdebf9',
-    marginVertical: 20,
+    marginVertical: 15,
     borderRadius: 15,
-    color: '#cdebf9',
-    backgroundColor: '#cdebf9',
+
+    backgroundColor: 'grey',
     overflow: 'hidden',
-    width: 120,
+    width: 150,
     marginLeft: 20,
+    height: 50,
   },
 
   text: {
@@ -176,13 +174,15 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     paddingTop: 5,
     color: '#cdebf9',
+    fontFamily: 'Chivo_400Regular',
   },
 
   input: {
     width: 170,
-    height: 40,
+    height: 50,
+    fontFamily: 'Chivo_400Regular',
 
-    fontSize: 19,
+    fontSize: 20,
     paddingHorizontal: 12,
     borderWidth: 2,
     borderColor: '#cdebf9',

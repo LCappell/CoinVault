@@ -1,18 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import {
-  StyleSheet,
-  ScrollView,
-  RefreshControl,
-  Text,
-  SafeAreaView,
-} from 'react-native';
-import { VictoryPie, VictoryChart } from 'victory-native';
+import { StyleSheet, ScrollView, RefreshControl, Text } from 'react-native';
+import { VictoryPie } from 'victory-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { RootState } from '../../redux/Store';
 import { useSelector } from 'react-redux';
 
-const CoinPie = () => {
+const CoinPie = ({ coinValues }) => {
   const navigation = useNavigation();
   const [refreshing, setRefreshing] = useState(false);
   const [allData, setAllData] = useState([]);
@@ -21,6 +15,33 @@ const CoinPie = () => {
   const coinAmount = useSelector(
     (state: RootState) => state.CoinInputData.amount
   );
+
+  // DONT DELETE
+  // const getCurrentCoinData = (userInput) => {
+  //   return coinValues.map((item) => {
+  //     let correctAmount;
+  //     const coinSymbols = item.symbol.toUpperCase().toString();
+  //     let coinCurrentPrices: any = +item.current_price;
+  //     if (userInput == coinSymbols) {
+  //       correctAmount = coinCurrentPrices;
+  //       return correctAmount;
+  //     }
+  //     console.log(correctAmount);
+  //   });
+  // };
+  // getCurrentCoinData('ETH');
+
+  const getCoinItemData = (userInput) => {
+    fetch(
+      `https://api.coingecko.com/api/v3/coins/${userInput}?tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`
+    )
+      .then((res) => res.json())
+      .then((output) => {
+        let price = output.market_data.current_price.usd;
+        console.log(price);
+      });
+  };
+  getCoinItemData('ethereum');
 
   let output: {}[] = [];
   let myData: any = {};
@@ -32,7 +53,9 @@ const CoinPie = () => {
 
       myData = {};
       myData.x = userCoin;
+
       myData.y = parseInt(userAmount);
+
       output.push(myData);
     });
   };
@@ -50,7 +73,6 @@ const CoinPie = () => {
       .then((res) => res.json())
       .then((coinInfo) => {
         setAllData(coinInfo);
-        console.log(allData);
         populateGraph(allData);
       });
   };
@@ -67,8 +89,13 @@ const CoinPie = () => {
 
   return (
     <ScrollView
+      style={styles.pieContainer}
       refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          tintColor='#cdebf9'
+        />
       }
     >
       <Text style={styles.text}> Click on wheel to expand... </Text>
@@ -113,7 +140,8 @@ const CoinPie = () => {
 export default CoinPie;
 
 const styles = StyleSheet.create({
-  container: { marginBottom: 0 },
+  container: {},
+  pieContainer: { marginTop: 10 },
 
-  text: { color: '#fff', textAlign: 'center', opacity: 0.4 },
+  text: { color: '#fff', textAlign: 'center', opacity: 0.4, marginBottom: 20 },
 });

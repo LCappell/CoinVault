@@ -1,7 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   StyleSheet,
-  Animated,
   TouchableOpacity,
   SafeAreaView,
   KeyboardAvoidingView,
@@ -17,8 +16,18 @@ import TabIcon from '../../components/TabIcon';
 import Icons from '../../constants/Icons';
 
 const Main = () => {
-  const progress = useRef(new Animated.Value(0)).current;
+  const [coinValues, setCoinValues] = useState([]);
   const formatEmail = auth.currentUser?.email.split('@')[0];
+
+  useEffect(() => {
+    fetch(
+      'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false'
+    )
+      .then((res) => res.json())
+      .then((output) => {
+        setCoinValues(output);
+      });
+  }, []);
 
   const navigation = useNavigation();
 
@@ -31,11 +40,11 @@ const Main = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView behavior='padding'>
+      <KeyboardAvoidingView behavior='position'>
         <SafeAreaView style={styles.coinDataArea}>
           <Header formatEmail={formatEmail} />
-          <CoinPie />
-          <UserInput />
+          <CoinPie coinValues={coinValues} />
+          <UserInput coinValues={coinValues} />
         </SafeAreaView>
       </KeyboardAvoidingView>
       <TouchableOpacity style={styles.signOutArea} onPress={handleSignOut}>
@@ -65,7 +74,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    marginBottom: 20,
   },
 
   text: {
