@@ -82,7 +82,7 @@ const Login: FC = () => {
           value={email}
           style={styles.userInput}
           placeholder='Email...'
-          placeholderTextColor='#fff'
+          placeholderTextColor='#cdebf9'
           blurOnSubmit={true}
           keyboardAppearance='dark'
           keyboardType='email-address'
@@ -93,7 +93,7 @@ const Login: FC = () => {
           style={styles.userInput}
           placeholder='Password...'
           keyboardAppearance='dark'
-          placeholderTextColor='#fff'
+          placeholderTextColor='#cdebf9'
           secureTextEntry={true}
         />
         <View style={styles.buttonArea}>
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: '#fff',
+    color: '#cdebf9',
     textAlign: 'center',
     fontFamily: 'Chivo_700Bold',
     marginVertical: 15,

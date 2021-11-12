@@ -17,7 +17,6 @@ const CoinPie = () => {
   const coinAmount = useSelector(
     (state: RootState) => state.CoinInputData.amount
   );
-  // console.log(coinAmount);
 
   let output: {}[] = [];
   let myData: any = {};
@@ -34,9 +33,6 @@ const CoinPie = () => {
     });
   };
 
-  // WORKING EXCEPT COIN DETAILS DOES NOT LOAD ON REFRESH
-  // IF DB IS EMPTY = PROBLEMS
-
   useEffect(() => {
     fetch('http://10.10.22.28:4000')
       .then((res) => res.json())
@@ -45,27 +41,23 @@ const CoinPie = () => {
       });
   }, [populateGraph]);
 
-
+  // WORKING EXCEPT COIN DETAILS DOES NOT LOAD ON REFRESH
+  // IF DB IS EMPTY = PROBLEMS
 
   const displayData = () => {
     if (output.length > 0) return output;
     return [{ x: 'No data yet...', y: 1 }];
   };
 
-  // const displayData = () => {
-  //   if (output.length > 0) return output;
-  //   return [{ x: 'No data yet...', y: 1 }];
-  // };
-
   return (
     <View style={styles.container}>
       <Text style={styles.text}> Click on wheel to expand... </Text>
       <VictoryPie
         labelRadius={({ innerRadius }) => +innerRadius + 20}
-        padAngle={({ datum }) => datum.y * 0.1}
-        padding={{ top: 20, bottom: 60 }}
+        padAngle={({ datum }) => datum.y * 0.6}
+        padding={{ top: 10, bottom: 60 }}
         innerRadius={100}
-        cornerRadius={({ datum }) => datum.y * 0.5}
+        cornerRadius={({ datum }) => datum.y * 0.1}
         colorScale={['tomato', 'orange', 'gold', 'cyan', 'navy']}
         data={output}
         animate={{
@@ -78,7 +70,7 @@ const CoinPie = () => {
             strokeWidth: 3,
           },
           labels: {
-            fontSize: 20,
+            fontSize: 17,
             fill: '#fff',
           },
         }}
@@ -89,7 +81,6 @@ const CoinPie = () => {
               onPressIn: () => {
                 navigation.navigate('Details');
               },
-              onPressOut: () => {},
             },
           },
         ]}

@@ -31,18 +31,30 @@ const DetailsPage = () => {
     return total;
   };
 
-  caluclateTotalPrice();
+  const handleDelete = (id: string) => {
+    fetch(`http://10.10.22.28:4000/${id}`, {
+      method: 'DELETE',
+    }).then(() => {
+      setValues((data) => data.filter((item: any) => item._id !== id));
+    });
+  };
 
   useEffect(() => {
     fetch('http://10.10.22.28:4000')
       .then((res) => res.json())
       .then((coinInfo) => {
+        caluclateTotalPrice();
         setValues(coinInfo);
         setTotalAmount(coinInfo);
       });
   }, []);
 
-  const renderItem = useCallback(({ item }) => <DetailsItem item={item} />, []);
+  const renderItem = useCallback(
+    ({ item }) => (
+      <DetailsItem onDelete={handleDelete} item={item} />
+    ),
+    []
+  );
   const keyExtractor = useCallback((item) => item._id, []);
 
   return (
@@ -74,7 +86,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     backgroundColor: '#000',
-
   },
 
   goback: {

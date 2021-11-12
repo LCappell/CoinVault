@@ -1,8 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  TouchableOpacity,
+} from 'react-native';
 import moment from 'moment';
+import TabIcon from '../../components/TabIcon';
+import Icons from '../../constants/Icons';
 
-const DetailsItem = ({ item }) => {
+const DetailsItem = ({ item, onDelete }) => {
   const formatDate = moment(item.openData).format('L');
 
   return (
@@ -13,6 +21,13 @@ const DetailsItem = ({ item }) => {
         <Text style={styles.coinText}>Bought at price: {item.userCoin}</Text>
         <Text style={styles.coinText}>Bought at price: {formatDate}</Text>
         <Text style={styles.coinText}>Current Price: ...</Text>
+
+        <TouchableOpacity
+          style={styles.deleteItem}
+          onPress={() => onDelete(item._id)}
+        >
+          <TabIcon icon={Icons.removeItem} />
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -29,6 +44,8 @@ const styles = StyleSheet.create({
     width: '100%',
     margin: 20,
   },
+
+  deleteItem: { position: 'absolute', right: 20, bottom: 20 },
 
   coinType: {
     textAlign: 'center',

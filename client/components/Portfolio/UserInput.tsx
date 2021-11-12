@@ -29,9 +29,7 @@ const UserInput = () => {
     const currentDate = selectedDate || date;
     setDate(currentDate);
   };
-  const coinAmount = useSelector(
-    (state: RootState) => state.CoinInputData.amount
-  );
+
   const addCoinData = () => {
     console.log(`Adding ${userAmount}`);
     dispatch(
