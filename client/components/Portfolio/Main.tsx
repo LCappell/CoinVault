@@ -1,15 +1,9 @@
 import React, { useRef } from 'react';
 import {
   StyleSheet,
-  TouchableWithoutFeedback,
   Animated,
-  View,
-  Text,
   TouchableOpacity,
   SafeAreaView,
-  Keyboard,
-  Button,
-  TextInput,
   KeyboardAvoidingView,
 } from 'react-native';
 
@@ -18,7 +12,6 @@ import { auth } from '../../firebase';
 import CoinPie from './CoinPie';
 import Header from './Header';
 import UserInput from './UserInput';
-
 
 import TabIcon from '../../components/TabIcon';
 import Icons from '../../constants/Icons';
@@ -44,11 +37,10 @@ const Main = () => {
           <CoinPie />
           <UserInput />
         </SafeAreaView>
-
       </KeyboardAvoidingView>
-        <TouchableOpacity style={styles.signOutArea} onPress={handleSignOut}>
-          <TabIcon icon={Icons.logout} />
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.signOutArea} onPress={handleSignOut}>
+        <TabIcon icon={Icons.logout} />
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };

@@ -8,9 +8,9 @@ const DetailsItem = ({ item }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.coinItem}>
-        <Text style={styles.coinText}>Coin: {item.type}</Text>
-        <Text style={styles.coinText}>Amount Bought: {item.amount}</Text>
-        <Text style={styles.coinText}>Bought at price: {item.coinPrice}</Text>
+        <Text style={styles.coinType}>Coin: {item.userCoin}</Text>
+        <Text style={styles.coinText}>Amount Bought: {item.userAmount}</Text>
+        <Text style={styles.coinText}>Bought at price: {item.userCoin}</Text>
         <Text style={styles.coinText}>Bought at price: {formatDate}</Text>
         <Text style={styles.coinText}>Current Price: ...</Text>
       </View>
@@ -22,21 +22,29 @@ export default DetailsItem;
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
     flex: 1,
-    borderWidth: 1,
-    borderColor: '#fff',
+    borderWidth: 4,
+    borderColor: '#89cff0',
     borderRadius: 10,
     width: '100%',
     margin: 20,
   },
 
-  coinText: {
-    color: '#fff',
-    margin: 2,
+  coinType: {
+    textAlign: 'center',
+    color: '#cdebf9',
+    marginBottom: 5,
     fontFamily: 'Chivo_400Regular',
     letterSpacing: 1.5,
+    fontSize: 20,
+  },
+
+  coinText: {
+    color: '#cdebf9',
+    margin: 5,
+    fontFamily: 'Chivo_400Regular',
+    letterSpacing: 1.5,
+    fontSize: 17,
   },
 
   coinItem: {

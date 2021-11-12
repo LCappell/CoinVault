@@ -62,8 +62,8 @@ const Login: FC = () => {
 
         console.log(error);
       });
-      setEmail('')
-      setPassword('')
+    setEmail('');
+    setPassword('');
   };
 
   const progress = useRef(new Animated.Value(0)).current;
@@ -165,8 +165,10 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#BFD7ED',
     width: 300,
-    letterSpacing: 1,
+    letterSpacing: 2,
     color: '#fff',
+    fontSize: 19,
+
     fontFamily: 'Chivo_700Bold',
 
     margin: 20,
@@ -178,5 +180,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'Chivo_700Bold',
     marginVertical: 15,
+    fontSize: 19,
+    letterSpacing: 1,
   },
 });

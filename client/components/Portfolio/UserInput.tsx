@@ -15,6 +15,9 @@ import { saveCoinData } from '../../redux/CoinInputData';
 import { RootState } from '../../redux/Store';
 import { useDispatch, useSelector } from 'react-redux';
 
+import TabIcon2 from '../../components/TabIcon2';
+import Icons from '../../constants/Icons';
+
 const UserInput = () => {
   const dispatch = useDispatch();
   const [date, setDate] = useState(new Date());
@@ -93,7 +96,7 @@ const UserInput = () => {
         />
         <View style={styles.btnArea}>
           <TouchableOpacity onPress={addCoinData} style={styles.button}>
-            <Text style={styles.btntext}>Add Data</Text>
+            <TabIcon2 icon={Icons.add} />
           </TouchableOpacity>
         </View>
       </View>
@@ -108,7 +111,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    marginBottom: 200,
+    marginBottom: 170,
   },
 
   dateArea: {},
@@ -116,12 +119,13 @@ const styles = StyleSheet.create({
   selector: {
     width: 150,
     height: 40,
-    fontSize: 14,
+    fontSize: 17,
+
     paddingHorizontal: 12,
     borderWidth: 2,
-    borderColor: '#fff',
+    borderColor: '#cdebf9',
     borderRadius: 8,
-    color: '#fff',
+    color: '#cdebf9',
     paddingRight: 30,
     marginVertical: 15,
   },
@@ -134,7 +138,7 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
+
     borderRadius: 5,
     width: 100,
     elevation: 3,
@@ -147,7 +151,7 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     fontWeight: 'bold',
     letterSpacing: 0.25,
-    color: '#000',
+    color: '#cdebf9',
   },
   row: {
     width: 400,
@@ -159,11 +163,11 @@ const styles = StyleSheet.create({
 
   datepicker: {
     borderWidth: 2,
-    borderColor: '#fff',
+    borderColor: '#cdebf9',
     marginVertical: 20,
     borderRadius: 15,
-    color: '#fff',
-    backgroundColor: '#fff',
+    color: '#cdebf9',
+    backgroundColor: '#cdebf9',
     overflow: 'hidden',
     width: 120,
     marginLeft: 20,
@@ -173,18 +177,19 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     letterSpacing: 1,
     paddingTop: 5,
-    color: '#fff',
+    color: '#cdebf9',
   },
 
   input: {
     width: 170,
     height: 40,
-    fontSize: 14,
+
+    fontSize: 19,
     paddingHorizontal: 12,
     borderWidth: 2,
-    borderColor: '#fff',
+    borderColor: '#cdebf9',
     borderRadius: 8,
-    color: '#fff',
+    color: '#cdebf9',
     paddingRight: 30,
     marginVertical: 15,
     marginHorizontal: 10,

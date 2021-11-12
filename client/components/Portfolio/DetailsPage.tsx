@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -14,15 +14,36 @@ import DetailsItem from './DetailsItem';
 import TabIcon from '../TabIcon';
 import Icons from '../../constants/Icons';
 
-const DetailsPage = ({ output }) => {
+const DetailsPage = () => {
   const navigation = useNavigation();
+  const [values, setValues] = useState([]);
+  const [totalAmount, setTotalAmount] = useState([]);
+
   const coinAmount = useSelector(
     (state: RootState) => state.CoinInputData.amount
   );
-  // console.log(coinAmount.forEach((item) => console.log(item)));
+
+  const caluclateTotalPrice = () => {
+    let total = 0;
+    totalAmount.map((item: any) => {
+      total += item.userAmount;
+    });
+    return total;
+  };
+
+  caluclateTotalPrice();
+
+  useEffect(() => {
+    fetch('http://10.10.22.28:4000')
+      .then((res) => res.json())
+      .then((coinInfo) => {
+        setValues(coinInfo);
+        setTotalAmount(coinInfo);
+      });
+  }, []);
 
   const renderItem = useCallback(({ item }) => <DetailsItem item={item} />, []);
-  const keyExtractor = useCallback((item) => item.amount.toString(), []);
+  const keyExtractor = useCallback((item) => item._id, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -33,10 +54,11 @@ const DetailsPage = ({ output }) => {
       >
         <TabIcon icon={Icons.goBack} />
       </TouchableOpacity>
+      <Text style={styles.text}>Current amount: ${caluclateTotalPrice()} </Text>
 
       <FlatList
         style={styles.flatListItem}
-        data={coinAmount}
+        data={values}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
       />
@@ -52,6 +74,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     backgroundColor: '#000',
+
   },
 
   goback: {
@@ -71,7 +94,18 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
 
-  text: { color: 'white' },
+  text: {
+    color: '#a0d8f3',
+    borderRadius: 10,
+    borderColor: '#fff',
+    borderWidth: 2,
+    padding: 15,
+    marginRight: 30,
+    fontFamily: 'Chivo_400Regular',
+    fontSize: 20,
+    top: 80,
+    letterSpacing: 1,
+  },
 
   flatListItem: {
     fontFamily: 'Chivo_400Regular',

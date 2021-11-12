@@ -34,6 +34,9 @@ const CoinPie = () => {
     });
   };
 
+  // WORKING EXCEPT COIN DETAILS DOES NOT LOAD ON REFRESH
+  // IF DB IS EMPTY = PROBLEMS
+
   useEffect(() => {
     fetch('http://10.10.22.28:4000')
       .then((res) => res.json())
@@ -42,18 +45,7 @@ const CoinPie = () => {
       });
   }, [populateGraph]);
 
-  // const populateGraph = () => {
-  //   for (let data in coinAmount) {
-  //     let userAmount = coinAmount[data].amount;
-  //     let userCoin = coinAmount[data].type;
-  //     myData = {};
-  //     myData.x = userCoin;
-  //     myData.y = parseInt(userAmount);
-  //     output.push(myData);
-  //   }
-  // };
 
-  // populateGraph();
 
   const displayData = () => {
     if (output.length > 0) return output;
