@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   StyleSheet,
-  View,
-  TouchableOpacity,
+  ScrollView,
+  RefreshControl,
   Text,
-  ViewBase,
+  SafeAreaView,
 } from 'react-native';
 import { VictoryPie, VictoryChart } from 'victory-native';
 import { useNavigation } from '@react-navigation/native';
@@ -14,6 +14,10 @@ import { useSelector } from 'react-redux';
 
 const CoinPie = () => {
   const navigation = useNavigation();
+  const [refreshing, setRefreshing] = useState(false);
+  const [allData, setAllData] = useState([]);
+  // console.log(allData);
+
   const coinAmount = useSelector(
     (state: RootState) => state.CoinInputData.amount
   );
@@ -41,17 +45,34 @@ const CoinPie = () => {
       });
   }, [populateGraph]);
 
-  // WORKING EXCEPT COIN DETAILS DOES NOT LOAD ON REFRESH
-  // IF DB IS EMPTY = PROBLEMS
-
-  const displayData = () => {
-    if (output.length > 0) return output;
-    return [{ x: 'No data yet...', y: 1 }];
+  const getData = () => {
+    fetch('http://10.10.22.28:4000')
+      .then((res) => res.json())
+      .then((coinInfo) => {
+        setAllData(coinInfo);
+        console.log(allData);
+        populateGraph(allData);
+      });
   };
 
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    try {
+      getData();
+      setRefreshing(false);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
   return (
-    <View style={styles.container}>
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
       <Text style={styles.text}> Click on wheel to expand... </Text>
+
       <VictoryPie
         labelRadius={({ innerRadius }) => +innerRadius + 20}
         padAngle={({ datum }) => datum.y * 0.6}
@@ -85,7 +106,7 @@ const CoinPie = () => {
           },
         ]}
       />
-    </View>
+    </ScrollView>
   );
 };
 
