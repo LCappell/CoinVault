@@ -29,6 +29,8 @@ const DetailsItem = ({ item, onDelete, apiData }) => {
     }
   });
 
+  const num = parseInt(dataNumber);
+
   const renderImage =
     item.userCoin === 'BTC'
       ? 'https://g.foolcdn.com/art/companylogos/square/btc.png'

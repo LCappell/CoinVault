@@ -20,6 +20,17 @@ const DetailsPage = () => {
   const [apiData, setApiData] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
 
+  const revenue = () => {
+    let total = 0;
+    const totalSpent = values.map((item) => {
+      const firstAmount = item.boughtPrice * item.userAmount;
+      total += firstAmount;
+    });
+    return total;
+  };
+
+  const totalRev = revenue();
+
   const getAllCoinData = async (...userInput) => {
     return await fetch(
       `https://api.nomics.com/v1/currencies/ticker?key=5df9ab07ed0bcc926c1db8e9c4320191e6ee60ca&ids=${userInput}&interval=1d`
@@ -99,6 +110,12 @@ const DetailsPage = () => {
     <SafeAreaView style={styles.container}>
       <Text style={styles.header}> Portfolio Details </Text>
       <Text style={styles.total}> Total: ${totalAmount.toLocaleString()} </Text>
+      <Text style={styles.revenue}>
+        Revenue:
+        <Text style={totalAmount - totalRev > 0 ? styles.green : styles.red}>
+          {` $${(totalAmount - totalRev).toLocaleString()}`}
+        </Text>
+      </Text>
 
       <TouchableOpacity
         style={styles.goback}
@@ -142,6 +159,9 @@ const styles = StyleSheet.create({
     opacity: 0.6,
   },
 
+  green: { color: 'green' },
+  red: { color: 'red' },
+
   header: {
     color: '#fff',
     position: 'absolute',
@@ -158,6 +178,16 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
     opacity: 0.8,
     fontSize: 25,
+  },
+
+  revenue: {
+    color: '#fff',
+    position: 'absolute',
+    top: 160,
+    letterSpacing: 2,
+    opacity: 0.8,
+    fontSize: 20,
+    marginTop: 8,
   },
 
   text: {
