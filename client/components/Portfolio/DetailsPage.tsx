@@ -17,18 +17,16 @@ import Icons from '../../constants/Icons';
 const DetailsPage = () => {
   const navigation = useNavigation();
   const [values, setValues] = useState([]);
-  const [totalAmount, setTotalAmount] = useState([]);
+  const [apiData, setApiData] = useState([]);
 
-  const coinAmount = useSelector(
-    (state: RootState) => state.CoinInputData.amount
-  );
-
-  const caluclateTotalPrice = () => {
-    let total = 0;
-    totalAmount.map((item: any) => {
-      total += item.userAmount;
-    });
-    return total;
+  const getAllCoinData = async (...userInput) => {
+    return await fetch(
+      `https://api.nomics.com/v1/currencies/ticker?key=5df9ab07ed0bcc926c1db8e9c4320191e6ee60ca&ids=${userInput}&interval=1d`
+    )
+      .then((res) => res.json())
+      .then((output) => {
+         setApiData(output);
+      });
   };
 
   const handleDelete = (id: string) => {
@@ -43,15 +41,14 @@ const DetailsPage = () => {
     fetch('http://10.10.22.28:4000')
       .then((res) => res.json())
       .then((coinInfo) => {
-        caluclateTotalPrice();
+        getAllCoinData('BTC', 'ETH', 'SOL', 'ADA', 'DOGE', 'XRP', 'SHIB');
         setValues(coinInfo);
-        setTotalAmount(coinInfo);
       });
   }, []);
 
   const renderItem = useCallback(
     ({ item }) => (
-      <DetailsItem onDelete={handleDelete} item={item} />
+      <DetailsItem apiData={apiData} onDelete={handleDelete} item={item} />
     ),
     []
   );
@@ -60,13 +57,15 @@ const DetailsPage = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.header}> Portfolio Details </Text>
+      <Text style={styles.total}> Total: {} </Text>
+
       <TouchableOpacity
         style={styles.goback}
         onPress={() => navigation.goBack()}
       >
         <TabIcon icon={Icons.goBack} />
       </TouchableOpacity>
-      <Text style={styles.text}>Current amount: ${caluclateTotalPrice()} </Text>
+      {/* <Text style={styles.text}>Current amount: ${caluclateTotalPrice()} </Text> */}
 
       <FlatList
         style={styles.flatListItem}
@@ -105,6 +104,15 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
 
+  total: {
+    color: '#fff',
+    position: 'absolute',
+    top: 130,
+    letterSpacing: 2,
+    opacity: 0.8,
+    fontSize: 25,
+  },
+
   text: {
     color: '#a0d8f3',
     borderRadius: 10,
@@ -120,7 +128,7 @@ const styles = StyleSheet.create({
 
   flatListItem: {
     fontFamily: 'Chivo_400Regular',
-    width: '90%',
+    width: '95%',
     marginTop: 120,
     paddingTop: 0,
     padding: 20,

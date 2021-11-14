@@ -32,10 +32,10 @@ const UserInput = ({ coinValues }) => {
     console.log(`Adding ${userAmount}`);
     dispatch(
       saveCoinData({
-        amount: userAmount,
-        type: userCoin,
+        userAmount: userAmount,
+        userCoin: userCoin,
         coinPrice: boughtPrice,
-        openData: date,
+        date: date,
       })
     );
 

@@ -19,8 +19,6 @@ const Portfolio: FC = () => {
       <Stack.Screen name='Login' component={Login} />
       <Stack.Screen name='PortfolioMain' component={Main} />
       <Stack.Screen name='Details' component={DetailsPage} />
-
-      {/* <Stack.Screen name='Settings' component={Settings} /> */}
     </Stack.Navigator>
   );
 };

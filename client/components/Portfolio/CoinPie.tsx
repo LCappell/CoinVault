@@ -1,47 +1,27 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { StyleSheet, ScrollView, RefreshControl, Text } from 'react-native';
+import {
+  StyleSheet,
+  ScrollView,
+  RefreshControl,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import { VictoryPie } from 'victory-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { RootState } from '../../redux/Store';
 import { useSelector } from 'react-redux';
 
+const db_url = 'http://10.10.22.28:4000';
+
 const CoinPie = ({ coinValues }) => {
   const navigation = useNavigation();
   const [refreshing, setRefreshing] = useState(false);
   const [allData, setAllData] = useState([]);
-  // console.log(allData);
 
   const coinAmount = useSelector(
     (state: RootState) => state.CoinInputData.amount
   );
-
-  // DONT DELETE
-  // const getCurrentCoinData = (userInput) => {
-  //   return coinValues.map((item) => {
-  //     let correctAmount;
-  //     const coinSymbols = item.symbol.toUpperCase().toString();
-  //     let coinCurrentPrices: any = +item.current_price;
-  //     if (userInput == coinSymbols) {
-  //       correctAmount = coinCurrentPrices;
-  //       return correctAmount;
-  //     }
-  //     console.log(correctAmount);
-  //   });
-  // };
-  // getCurrentCoinData('ETH');
-
-  const getCoinItemData = (userInput) => {
-    fetch(
-      `https://api.coingecko.com/api/v3/coins/${userInput}?tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`
-    )
-      .then((res) => res.json())
-      .then((output) => {
-        let price = output.market_data.current_price.usd;
-        console.log(price);
-      });
-  };
-  getCoinItemData('ethereum');
 
   let output: {}[] = [];
   let myData: any = {};
@@ -51,17 +31,30 @@ const CoinPie = ({ coinValues }) => {
       let userAmount = item.userAmount;
       let userCoin = item.userCoin;
 
+      const timesBy =
+        userCoin === 'BTC'
+          ? 6
+          : userCoin === 'ETH'
+          ? 4
+          : userCoin === 'SOL'
+          ? 2
+          : userCoin === 'DOGE'
+          ? 0.14
+          : userCoin === 'ADA'
+          ? 1.5
+          : 1;
+
       myData = {};
       myData.x = userCoin;
 
-      myData.y = parseInt(userAmount);
+      myData.y = parseInt(userAmount) * timesBy;
 
       output.push(myData);
     });
   };
 
   useEffect(() => {
-    fetch('http://10.10.22.28:4000')
+    fetch(db_url)
       .then((res) => res.json())
       .then((coinInfo) => {
         populateGraph(coinInfo);
@@ -69,7 +62,7 @@ const CoinPie = ({ coinValues }) => {
   }, [populateGraph]);
 
   const getData = () => {
-    fetch('http://10.10.22.28:4000')
+    fetch(db_url)
       .then((res) => res.json())
       .then((coinInfo) => {
         setAllData(coinInfo);
@@ -98,14 +91,14 @@ const CoinPie = ({ coinValues }) => {
         />
       }
     >
-      <Text style={styles.text}> Click on wheel to expand... </Text>
+      <Text style={styles.text}>Click on wheel to expand...</Text>
 
       <VictoryPie
         labelRadius={({ innerRadius }) => +innerRadius + 20}
-        padAngle={({ datum }) => datum.y * 0.6}
+        padAngle={({ datum }) => datum.y * 0.7}
         padding={{ top: 10, bottom: 60 }}
         innerRadius={100}
-        cornerRadius={({ datum }) => datum.y * 0.1}
+        cornerRadius={({ datum }) => datum.y * 0.4}
         colorScale={['tomato', 'orange', 'gold', 'cyan', 'navy']}
         data={output}
         animate={{
@@ -118,7 +111,8 @@ const CoinPie = ({ coinValues }) => {
             strokeWidth: 3,
           },
           labels: {
-            fontSize: 17,
+            fontSize: 14,
+            textAlign: 'center',
             fill: '#fff',
           },
         }}
