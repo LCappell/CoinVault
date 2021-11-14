@@ -14,7 +14,7 @@ import Icons from '../../constants/Icons';
 const DetailsItem = ({ item, onDelete, apiData }) => {
   const filteredApiData = apiData.map((data) => {
     if (data.symbol == item.userCoin) {
-      return data.price;
+      return parseInt(data.price);
     }
   });
 
@@ -29,7 +29,6 @@ const DetailsItem = ({ item, onDelete, apiData }) => {
     }
   });
 
- 
   const renderImage =
     item.userCoin === 'BTC'
       ? 'https://g.foolcdn.com/art/companylogos/square/btc.png'
@@ -90,8 +89,9 @@ const DetailsItem = ({ item, onDelete, apiData }) => {
           {item.userAmount}
         </Text>
 
-        <Text style={styles.coinText}>
-          <Text style={styles.textBlue}>Amount in $: {dataNumber}</Text>
+        <Text style={[styles.coinText, { marginRight: 3 }]}>
+          <Text style={styles.textBlue}> Amount in $: </Text>
+          {dataNumber}
         </Text>
 
         <TouchableOpacity

@@ -4,7 +4,7 @@ import {
   Text,
   TouchableOpacity,
   SafeAreaView,
-  View,
+  RefreshControl,
   FlatList,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -18,6 +18,7 @@ const DetailsPage = () => {
   const navigation = useNavigation();
   const [values, setValues] = useState([]);
   const [apiData, setApiData] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
 
   const getAllCoinData = async (...userInput) => {
     return await fetch(
@@ -25,9 +26,34 @@ const DetailsPage = () => {
     )
       .then((res) => res.json())
       .then((output) => {
-         setApiData(output);
+        setApiData(output);
       });
   };
+
+  const valuesMap: any = values.map((item) => item.userCoin);
+  const valuesAmount: any = values.map((item) => item.userAmount);
+
+  const dataNumber = apiData.map((data) => {
+    if (valuesMap.includes(data.symbol)) {
+      return parseInt(data.price) * parseInt(valuesAmount);
+    }
+  });
+
+  // const total = dataNumber.reduce((a, b) => a + b);
+  const sumofCoins = dataNumber.map((price) => {
+    let totalSum = 0;
+    if (price !== undefined) {
+      totalSum += parseInt(price);
+    } else {
+      return null;
+    }
+    return parseInt(totalSum);
+  });
+
+  // @ts-ignore:next-line
+  const totalAmount = (sumofCoins[0] +=
+    // @ts-ignore:next-line
+    sumofCoins[1] + sumofCoins[2] + sumofCoins[3]);
 
   const handleDelete = (id: string) => {
     fetch(`http://10.10.22.28:4000/${id}`, {
@@ -36,6 +62,16 @@ const DetailsPage = () => {
       setValues((data) => data.filter((item: any) => item._id !== id));
     });
   };
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    try {
+      getAllCoinData('BTC', 'ETH', 'SOL', 'ADA', 'DOGE', 'XRP', 'SHIB');
+
+      setRefreshing(false);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
 
   useEffect(() => {
     fetch('http://10.10.22.28:4000')
@@ -48,7 +84,12 @@ const DetailsPage = () => {
 
   const renderItem = useCallback(
     ({ item }) => (
-      <DetailsItem apiData={apiData} onDelete={handleDelete} item={item} />
+      <DetailsItem
+        apiData={apiData}
+        onDelete={handleDelete}
+        item={item}
+        getAllCoinData={getAllCoinData}
+      />
     ),
     []
   );
@@ -57,7 +98,7 @@ const DetailsPage = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.header}> Portfolio Details </Text>
-      <Text style={styles.total}> Total: {} </Text>
+      <Text style={styles.total}> Total: ${totalAmount.toLocaleString()} </Text>
 
       <TouchableOpacity
         style={styles.goback}
@@ -65,13 +106,19 @@ const DetailsPage = () => {
       >
         <TabIcon icon={Icons.goBack} />
       </TouchableOpacity>
-      {/* <Text style={styles.text}>Current amount: ${caluclateTotalPrice()} </Text> */}
 
       <FlatList
         style={styles.flatListItem}
         data={values}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor='#fff'
+          />
+        }
       />
     </SafeAreaView>
   );
@@ -101,7 +148,7 @@ const styles = StyleSheet.create({
     top: 70,
     letterSpacing: 2,
     opacity: 0.8,
-    fontSize: 25,
+    fontSize: 20,
   },
 
   total: {

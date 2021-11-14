@@ -23,3 +23,4 @@ export const CoinInputData = createSlice({
 export const { saveCoinData } = CoinInputData.actions;
 
 export default CoinInputData.reducer;
+

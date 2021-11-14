@@ -15,13 +15,13 @@ import { useSelector } from 'react-redux';
 const db_url = 'http://10.10.22.28:4000';
 
 const CoinPie = ({ coinValues }) => {
-  const navigation = useNavigation();
-  const [refreshing, setRefreshing] = useState(false);
-  const [allData, setAllData] = useState([]);
-
   const coinAmount = useSelector(
     (state: RootState) => state.CoinInputData.amount
   );
+  console.log(coinAmount);
+  const navigation = useNavigation();
+  const [refreshing, setRefreshing] = useState(false);
+  const [allData, setAllData] = useState([]);
 
   let output: {}[] = [];
   let myData: any = {};
@@ -33,7 +33,7 @@ const CoinPie = ({ coinValues }) => {
 
       const timesBy =
         userCoin === 'BTC'
-          ? 6
+          ? 14
           : userCoin === 'ETH'
           ? 4
           : userCoin === 'SOL'
