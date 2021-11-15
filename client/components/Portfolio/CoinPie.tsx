@@ -22,6 +22,7 @@ const CoinPie = ({ coinValues }) => {
   const navigation = useNavigation();
   const [refreshing, setRefreshing] = useState(false);
   const [allData, setAllData] = useState([]);
+  const [apiData, setApiData] = useState([]);
 
   let output: {}[] = [];
   let myData: any = {};
@@ -134,7 +135,7 @@ const CoinPie = ({ coinValues }) => {
 export default CoinPie;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: { backgroundColor: '#080808' },
   pieContainer: { marginTop: 10 },
 
   text: { color: '#fff', textAlign: 'center', opacity: 0.4, marginBottom: 20 },

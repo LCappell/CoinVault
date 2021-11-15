@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     width: 300,
     letterSpacing: 2,
     color: '#fff',
-    fontSize: 19,
+    fontSize: 17,
 
     fontFamily: 'Chivo_700Bold',
 

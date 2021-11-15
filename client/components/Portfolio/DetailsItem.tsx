@@ -11,25 +11,46 @@ import moment from 'moment';
 import TabIcon from '../../components/TabIcon';
 import Icons from '../../constants/Icons';
 
-const DetailsItem = ({ item, onDelete, apiData }) => {
-  const filteredApiData = apiData.map((data) => {
+const DetailsItem = ({ item, onDelete }) => {
+  const [apiCall, setApiCall] = useState([]);
+
+  const getAllCoinData = async (...userInput) => {
+    try {
+      await fetch(
+        `https://api.nomics.com/v1/currencies/ticker?key=5df9ab07ed0bcc926c1db8e9c4320191e6ee60ca&ids=${userInput}&interval=1d`
+      )
+        .then((res) => res.json())
+        .then((output) => {
+          setApiCall(output);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const coinCurrentPrice = apiCall.map((data) => {
     if (data.symbol == item.userCoin) {
       return parseInt(data.price);
     }
   });
 
-  const filteredApiData2 = apiData.map((data) => {
+  const CoinPriceChange = apiCall.map((data) => {
     if (data.symbol == item.userCoin) {
       return data['1d'].price_change_pct;
     }
   });
-  const dataNumber = apiData.map((data) => {
+
+  const dataNumber = apiCall.map((data) => {
     if (data.symbol == item.userCoin) {
       return parseInt(data.price) * item.userAmount;
     }
   });
 
-  const num = parseInt(dataNumber);
+  // This will get real time data
+  setTimeout(() => {
+    getAllCoinData('BTC', 'ETH', 'SOL', 'ADA');
+  }, 1000);
+  clearTimeout();
 
   const renderImage =
     item.userCoin === 'BTC'
@@ -68,12 +89,12 @@ const DetailsItem = ({ item, onDelete, apiData }) => {
 
         <Text style={styles.coinText}>
           <Text style={styles.textBlue}> Current Price: </Text> $
-          {filteredApiData}
+          {coinCurrentPrice}
         </Text>
         <Text style={[styles.coinText, styles.marginLeft]}>
           <Text style={styles.textBlue}>Price Change: </Text>
-          <Text style={filteredApiData2 > 0 ? styles.green : styles.red}>
-            {filteredApiData2}%
+          <Text style={CoinPriceChange > 0 ? styles.green : styles.red}>
+            {CoinPriceChange}%
           </Text>
         </Text>
 
@@ -86,13 +107,8 @@ const DetailsItem = ({ item, onDelete, apiData }) => {
           <Text style={styles.textBlue}> Date of purchase: </Text> {formatDate}
         </Text>
 
-        <Text style={styles.coinText}>
-          <Text style={styles.textBlue}> Amount: </Text>
-          {item.userAmount}
-        </Text>
-
         <Text style={[styles.coinText, { marginRight: 3 }]}>
-          <Text style={styles.textBlue}> Amount in $: </Text>
+          <Text style={styles.textBlue}> Amount </Text>$
           {dataNumber}
         </Text>
 
@@ -115,7 +131,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 4,
     borderBottomColor: '#89cff0',
     width: '100%',
-    margin: 20,
+    marginHorizontal: 20,
   },
 
   textBlue: { color: '#89cff0' },

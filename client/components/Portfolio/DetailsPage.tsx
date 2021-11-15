@@ -6,8 +6,10 @@ import {
   SafeAreaView,
   RefreshControl,
   FlatList,
+  View,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import UserPortfolio from './UserPortfolio';
 import { RootState } from '../../redux/Store';
 import { useSelector } from 'react-redux';
 import DetailsItem from './DetailsItem';
@@ -20,9 +22,10 @@ const DetailsPage = () => {
   const [apiData, setApiData] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
 
+  // Returns total revenue of the portfolio
   const revenue = () => {
     let total = 0;
-    const totalSpent = values.map((item) => {
+    values.map((item) => {
       const firstAmount = item.boughtPrice * item.userAmount;
       total += firstAmount;
     });
@@ -31,26 +34,17 @@ const DetailsPage = () => {
 
   const totalRev = revenue();
 
-  const getAllCoinData = async (...userInput) => {
-    return await fetch(
-      `https://api.nomics.com/v1/currencies/ticker?key=5df9ab07ed0bcc926c1db8e9c4320191e6ee60ca&ids=${userInput}&interval=1d`
-    )
-      .then((res) => res.json())
-      .then((output) => {
-        setApiData(output);
-      });
-  };
+  // console.log('API DATA DETAILS:', apiData);
 
-  const valuesMap: any = values.map((item) => item.userCoin);
+  const valuesCoin: any = values.map((item) => item.userCoin);
   const valuesAmount: any = values.map((item) => item.userAmount);
 
   const dataNumber = apiData.map((data) => {
-    if (valuesMap.includes(data.symbol)) {
+    if (valuesCoin.includes(data.symbol)) {
       return parseInt(data.price) * parseInt(valuesAmount);
     }
   });
 
-  // const total = dataNumber.reduce((a, b) => a + b);
   const sumofCoins = dataNumber.map((price) => {
     let totalSum = 0;
     if (price !== undefined) {
@@ -66,6 +60,7 @@ const DetailsPage = () => {
     // @ts-ignore:next-line
     sumofCoins[1] + sumofCoins[2] + sumofCoins[3]);
 
+  // DELETE HTTP REQUEST
   const handleDelete = (id: string) => {
     fetch(`http://10.10.22.28:4000/${id}`, {
       method: 'DELETE',
@@ -73,34 +68,42 @@ const DetailsPage = () => {
       setValues((data) => data.filter((item: any) => item._id !== id));
     });
   };
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
+
+  const getAllCoinData = async (...userInput) => {
     try {
-      getAllCoinData('BTC', 'ETH', 'SOL', 'ADA', 'DOGE', 'XRP', 'SHIB');
-
-      setRefreshing(false);
+      await fetch(
+        `https://api.nomics.com/v1/currencies/ticker?key=5df9ab07ed0bcc926c1db8e9c4320191e6ee60ca&ids=${userInput}&interval=1d`
+      )
+        .then((res) => res.json())
+        .then((output) => {
+          setApiData(output);
+        });
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
-  }, []);
+  };
 
-  useEffect(() => {
-    fetch('http://10.10.22.28:4000')
-      .then((res) => res.json())
-      .then((coinInfo) => {
-        getAllCoinData('BTC', 'ETH', 'SOL', 'ADA', 'DOGE', 'XRP', 'SHIB');
-        setValues(coinInfo);
-      });
+  const getDbData = async () => {
+    try {
+      await fetch('http://10.10.22.28:4000')
+        .then((res) => res.json())
+        .then((coinInfo) => {
+          setValues(coinInfo);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // @ts-ignore:next-line
+  useEffect(async () => {
+    getAllCoinData('BTC', 'ETH', 'SOL', 'ADA', 'DOGE', 'XRP', 'SHIB');
+    await getDbData();
   }, []);
 
   const renderItem = useCallback(
     ({ item }) => (
-      <DetailsItem
-        apiData={apiData}
-        onDelete={handleDelete}
-        item={item}
-        getAllCoinData={getAllCoinData}
-      />
+      <DetailsItem apiData={apiData} onDelete={handleDelete} item={item} />
     ),
     []
   );
@@ -109,13 +112,17 @@ const DetailsPage = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.header}> Portfolio Details </Text>
-      <Text style={styles.total}> Total: ${totalAmount.toLocaleString()} </Text>
-      <Text style={styles.revenue}>
-        Revenue:
-        <Text style={totalAmount - totalRev > 0 ? styles.green : styles.red}>
-          {` $${(totalAmount - totalRev).toLocaleString()}`}
+      <View style={styles.portArea}>
+        <Text style={styles.total}>
+          Total: ${totalAmount.toLocaleString()}{' '}
         </Text>
-      </Text>
+        <Text style={styles.revenue}>
+          Revenue:
+          <Text style={totalAmount - totalRev > 0 ? styles.green : styles.red}>
+            {` $${(totalAmount - totalRev).toLocaleString()}`}
+          </Text>
+        </Text>
+      </View>
 
       <TouchableOpacity
         style={styles.goback}
@@ -126,16 +133,22 @@ const DetailsPage = () => {
 
       <FlatList
         style={styles.flatListItem}
+        ListHeaderComponent={
+          <Text
+            style={{
+              color: '#fff',
+
+              opacity: 0.6,
+              letterSpacing: 2,
+              fontFamily: 'Chivo_400Regular',
+            }}
+          >
+            Your Assets:
+          </Text>
+        }
         data={values}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-            tintColor='#fff'
-          />
-        }
       />
     </SafeAreaView>
   );
@@ -148,7 +161,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: '#080808',
+  },
+
+  listHeader: {
+    color: '#fff',
+    opacity: 0.6,
+    letterSpacing: 2,
+    fontFamily: 'Chivo_400Regular',
   },
 
   goback: {
@@ -157,6 +177,17 @@ const styles = StyleSheet.create({
     top: 70,
     left: 20,
     opacity: 0.6,
+  },
+
+  portArea: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    backgroundColor: '#cdebf9',
+    position: 'absolute',
+    top: 110,
+    height: 50,
+    width: '100%',
   },
 
   green: { color: 'green' },
@@ -172,22 +203,17 @@ const styles = StyleSheet.create({
   },
 
   total: {
-    color: '#fff',
-    position: 'absolute',
-    top: 130,
+    color: '#000',
     letterSpacing: 2,
     opacity: 0.8,
-    fontSize: 25,
+    fontSize: 18,
   },
 
   revenue: {
-    color: '#fff',
-    position: 'absolute',
-    top: 160,
+    color: '#000',
     letterSpacing: 2,
     opacity: 0.8,
-    fontSize: 20,
-    marginTop: 8,
+    fontSize: 18,
   },
 
   text: {
@@ -207,7 +233,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Chivo_400Regular',
     width: '95%',
     marginTop: 120,
-    paddingTop: 0,
     padding: 20,
+    marginBottom: 100,
   },
 });

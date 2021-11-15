@@ -5,6 +5,8 @@ import {
   SafeAreaView,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
   View,
 } from 'react-native';
 
@@ -53,49 +55,53 @@ const UserInput = ({ coinValues }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.row}>
-        <TextInput
-          placeholder='Input a coin...'
-          placeholderTextColor='#fff'
-          value={userCoin}
-          style={styles.selector}
-          onChangeText={(val) => setUserCoin(val)}
-          keyboardAppearance='dark'
-        />
-        <View style={styles.dateArea}>
-          <DateTimePicker
-            testID='dateTimePicker'
-            value={date}
-            is24Hour={true}
-            mode='date'
-            display='default'
-            onChange={onChange}
-            style={styles.datepicker}
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.row}>
+          <TextInput
+            placeholder='Input a coin...'
+            placeholderTextColor='#fff'
+            value={userCoin}
+            style={styles.selector}
+            onChangeText={(val) => setUserCoin(val)}
+            keyboardAppearance='dark'
           />
-        </View>
+          <View style={styles.dateArea}>
+            <DateTimePicker
+              testID='dateTimePicker'
+              value={date}
+              is24Hour={true}
+              mode='date'
+              display='default'
+              onChange={onChange}
+              style={styles.datepicker}
+            />
+          </View>
 
-        <TextInput
-          placeholder='Open price...'
-          placeholderTextColor='#fff'
-          value={boughtPrice}
-          style={styles.input}
-          onChangeText={(val) => setBoughtPrice(val)}
-          keyboardAppearance='dark'
-        />
-        <TextInput
-          placeholder='Amount...'
-          placeholderTextColor='#fff'
-          value={userAmount}
-          style={styles.input}
-          onChangeText={(val) => setUserAmount(val)}
-          keyboardAppearance='dark'
-        />
-        <View style={styles.btnArea}>
-          <TouchableOpacity onPress={addCoinData} style={styles.button}>
-            <TabIcon2 icon={Icons.add} />
-          </TouchableOpacity>
+          <TextInput
+            placeholder='Open price...'
+            placeholderTextColor='#fff'
+            value={boughtPrice}
+            style={styles.input}
+            onChangeText={(val) => setBoughtPrice(val)}
+            keyboardAppearance='dark'
+            keyboardType={'numeric'}
+          />
+          <TextInput
+            placeholder='Amount...'
+            placeholderTextColor='#fff'
+            value={userAmount}
+            style={styles.input}
+            onChangeText={(val) => setUserAmount(val)}
+            keyboardAppearance='dark'
+            keyboardType={'numeric'}
+          />
+          <View style={styles.btnArea}>
+            <TouchableOpacity onPress={addCoinData} style={styles.button}>
+              <TabIcon2 icon={Icons.add} />
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     </SafeAreaView>
   );
 };
