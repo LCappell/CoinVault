@@ -17,6 +17,7 @@ const CoinSearch = ({ input, filterCoins }) => {
         placeholder='Search...'
         placeholderTextColor='#fff'
         style={styles.input}
+        keyboardAppearance='dark'
       />
     </SafeAreaView>
   );

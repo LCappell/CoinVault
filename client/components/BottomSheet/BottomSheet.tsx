@@ -81,11 +81,11 @@ const BottomSheet = ({ selectCoin, sparkLine }) => {
         <View style={styles.coinInfo}>
           <View style={styles.border}>
             <Text style={styles.listItem}>
-              Market Cap: ${selectCoin.market_cap}
+              Market Cap: ${selectCoin.market_cap.toLocaleString()}
             </Text>
           </View>
           <View style={styles.border}>
-            <Text style={styles.listItem}> ATH: ${selectCoin.ath} </Text>
+            <Text style={styles.listItem}> ATH: ${selectCoin.ath.toLocaleString()} </Text>
           </View>
           <View style={styles.border}>
             <Text style={styles.listItem}>
@@ -94,7 +94,8 @@ const BottomSheet = ({ selectCoin, sparkLine }) => {
           </View>
           <View style={styles.border}>
             <Text style={styles.listItem}>
-              Circulating Supply: {selectCoin.circulating_supply}
+              Circulating Supply:{' '}
+              {selectCoin.circulating_supply.toLocaleString()}
             </Text>
           </View>
         </View>
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
   bottomSheetContainer: {
     justifyContent: 'space-evenly',
     backgroundColor: '#181818',
-    borderRadius: 50,
+    borderRadius: 20,
     margin: 10,
     marginRight: 20,
     marginLeft: 20,
@@ -192,6 +193,6 @@ const styles = StyleSheet.create({
     padding: 8,
     // backgroundColor: '#cdebf9',
     overflow: 'hidden',
-    borderRadius: 15,
+
   },
 });

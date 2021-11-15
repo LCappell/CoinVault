@@ -102,5 +102,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontFamily: 'Chivo_700Bold',
     letterSpacing: 1,
+    fontSize: 15,
   },
 });

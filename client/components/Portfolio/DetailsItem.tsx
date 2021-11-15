@@ -100,16 +100,11 @@ const DetailsItem = ({ item, onDelete }) => {
 
         <Text style={styles.coinText}>
           <Text style={styles.textBlue}> Bought at price: </Text> $
-          {item.boughtPrice}
-        </Text>
-
-        <Text style={styles.coinText}>
-          <Text style={styles.textBlue}> Date of purchase: </Text> {formatDate}
+          {item.boughtPrice.toLocaleString()}
         </Text>
 
         <Text style={[styles.coinText, { marginRight: 3 }]}>
-          <Text style={styles.textBlue}> Amount </Text>$
-          {dataNumber}
+          <Text style={styles.textBlue}> Amount </Text>${dataNumber}
         </Text>
 
         <TouchableOpacity

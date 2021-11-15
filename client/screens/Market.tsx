@@ -6,6 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import CoinList from '../components/MarketPage/CoinList';
 import CoinSearch from '../components/MarketPage/CoinSearch';
 import MarketLoading from '../components/MarketPage/MarketLoading';
+import NftList from '../components/MarketPage/NFT/NftList';
 // Type
 import { coinData } from '../types/coinData';
 
@@ -15,6 +16,8 @@ const Market: FC = () => {
   const [filteredCoin, setFilteredCoin] = useState([]);
   const [showSearch, setShowSearch] = useState(false);
   const [isLoaded, setisLoaded] = useState(false);
+  const [nftClicked, setIsNftClicked] = useState(false);
+  const [NFTData, setNFTData] = useState([]);
 
   /**
    * Search Bar function
@@ -45,7 +48,17 @@ const Market: FC = () => {
       });
   }, []);
 
-  useEffect(() => getMarketData(), []);
+  const getNFTData = useCallback(() => {
+    fetch('https://api.opensea.io/api/v1/assets?&limit=50')
+      .then((res) => res.json())
+      .then((output) => {
+        setNFTData(output.assets);
+      });
+  }, []);
+
+  useEffect(() => {
+    getMarketData();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -63,17 +76,13 @@ const Market: FC = () => {
         <CoinSearch filterCoins={filterCoins} input={input} />
       ) : null}
 
-      {isLoaded ? (
-        <CoinList
-          input={input}
-          filteredCoin={filteredCoin}
-          filterCoins={filterCoins}
-          coinData={coin}
-          getMarketData={getMarketData}
-        />
-      ) : (
-        <MarketLoading />
-      )}
+      <CoinList
+        input={input}
+        filteredCoin={filteredCoin}
+        filterCoins={filterCoins}
+        coinData={coin}
+        getMarketData={getMarketData}
+      />
     </SafeAreaView>
   );
 };

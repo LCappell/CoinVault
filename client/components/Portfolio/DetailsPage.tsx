@@ -4,6 +4,7 @@ import {
   Text,
   TouchableOpacity,
   SafeAreaView,
+  ScrollView,
   RefreshControl,
   FlatList,
   View,
@@ -112,6 +113,7 @@ const DetailsPage = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.header}> Portfolio Details </Text>
+
       <View style={styles.portArea}>
         <Text style={styles.total}>
           Total: ${totalAmount.toLocaleString()}{' '}

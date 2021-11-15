@@ -18,7 +18,7 @@ const CoinPie = ({ coinValues }) => {
   const coinAmount = useSelector(
     (state: RootState) => state.CoinInputData.amount
   );
-  console.log(coinAmount);
+
   const navigation = useNavigation();
   const [refreshing, setRefreshing] = useState(false);
   const [allData, setAllData] = useState([]);
@@ -36,9 +36,9 @@ const CoinPie = ({ coinValues }) => {
         userCoin === 'BTC'
           ? 14
           : userCoin === 'ETH'
-          ? 4
+          ? 6
           : userCoin === 'SOL'
-          ? 2
+          ? 4
           : userCoin === 'DOGE'
           ? 0.14
           : userCoin === 'ADA'
@@ -100,7 +100,7 @@ const CoinPie = ({ coinValues }) => {
         padding={{ top: 10, bottom: 60 }}
         innerRadius={100}
         cornerRadius={({ datum }) => datum.y * 0.4}
-        colorScale={['tomato', 'orange', 'gold', 'cyan', 'navy']}
+        colorScale={['tomato', '#a0d8f3', 'gold', 'cyan', 'navy', '#899cf0']}
         data={output}
         animate={{
           duration: 2000,

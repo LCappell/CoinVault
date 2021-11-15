@@ -3,6 +3,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   SafeAreaView,
+  Text,
+  View,
   KeyboardAvoidingView,
 } from 'react-native';
 
@@ -14,9 +16,14 @@ import UserInput from './UserInput';
 
 import TabIcon from '../../components/TabIcon';
 import Icons from '../../constants/Icons';
+import TabIcon2 from '../../components/TabIcon2';
+import TabIcon3 from '../TabIcon3';
+import Assets from './Assets';
 
 const Main = () => {
   const [coinValues, setCoinValues] = useState([]);
+  const [showInput, setShowInput] = useState(false);
+  const [isClicked, setisClicked] = useState(false);
   const formatEmail = auth.currentUser?.email.split('@')[0];
 
   useEffect(() => {
@@ -38,13 +45,46 @@ const Main = () => {
       .catch((err) => console.log(err));
   };
 
+  const Button = React.memo(() => {
+    return (
+      <button
+        onPress={() => {
+          setShowInput(!showInput);
+          setisClicked(!isClicked);
+        }}
+      >
+        Press me
+      </button>
+    );
+  });
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView behavior='position'>
         <SafeAreaView style={styles.coinDataArea}>
           <Header formatEmail={formatEmail} />
           <CoinPie coinValues={coinValues} />
-          <UserInput coinValues={coinValues} />
+
+          <TouchableOpacity
+            style={styles.addPosition}
+            onPress={() => {
+              setShowInput(!showInput);
+              setisClicked(!isClicked);
+            }}
+          >
+            {isClicked ? (
+              <View style={styles.row}>
+                <TabIcon3 icon={Icons.addCoin} />
+                <Text style={styles.addText}>Add Coins</Text>
+              </View>
+            ) : (
+              <View style={styles.row}>
+              <Text style={styles.asset}>Transactions</Text>
+              <TabIcon3 icon={Icons.money} />
+              </View>
+            )}
+          </TouchableOpacity>
+          {!showInput ? <UserInput coinValues={coinValues} /> : <Assets />}
         </SafeAreaView>
       </KeyboardAvoidingView>
       <TouchableOpacity style={styles.signOutArea} onPress={handleSignOut}>
@@ -61,6 +101,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     marginBottom: 36,
   },
+  addPosition: { position: 'absolute', top: 420, right: 20 },
 
   container: {
     justifyContent: 'center',
@@ -68,6 +109,32 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flex: 1,
     backgroundColor: '#000',
+  },
+  row: {flexDirection: 'row'},
+
+  addText: {
+    color: '#fff',
+    paddingTop: 10,
+    fontFamily: 'Chivo_400Regular',
+    letterSpacing: 1,
+    textAlign: 'center',
+    fontSize: 18,
+    opacity: 0.7,
+    marginTop: 35,
+    paddingLeft: 10,
+    marginRight: 20
+  },
+
+  asset: {
+    color: '#fff',
+    paddingTop: 10,
+    fontFamily: 'Chivo_400Regular',
+    letterSpacing: 1,
+    textAlign: 'center',
+    fontSize: 18,
+    opacity: 0.5,
+    marginTop: 35,
+    marginRight: 10
   },
 
   coinDataArea: {

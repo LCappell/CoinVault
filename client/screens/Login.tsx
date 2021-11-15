@@ -149,9 +149,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
 
-  lottie: { width: 100, height: 250 },
+  lottie: { width: 100, height: 250, marginBottom: 20 },
 
-  logo: { width: 400, height: 200, borderRadius: 40 },
+  logo: { width: 400, height: 200, borderRadius: 40, marginTop: 10 },
 
   logoArea: {
     justifyContent: 'center',
@@ -167,10 +167,8 @@ const styles = StyleSheet.create({
     width: 300,
     letterSpacing: 2,
     color: '#fff',
-    fontSize: 17,
-
-    fontFamily: 'Chivo_700Bold',
-
+    fontSize: 18,
+    fontFamily: 'Chivo_400Regular',
     margin: 20,
     borderRadius: 20,
   },
@@ -178,7 +176,7 @@ const styles = StyleSheet.create({
   text: {
     color: '#cdebf9',
     textAlign: 'center',
-    fontFamily: 'Chivo_700Bold',
+    fontFamily: 'Chivo_400Regular',
     marginVertical: 15,
     fontSize: 19,
     letterSpacing: 1,

@@ -7,10 +7,6 @@ import NewsSearch from '../components/NewsPage/NewsSearch';
 // Type
 import { CoinNews } from '../types/CoinNews';
 
-// API KEY
-// import { API_KEY } from 'react-native-dotenv';
-// // jza2gmt5nvxo0cqjka1xjjqojwizcmlx8lpeutgl
-
 const News: FC<CoinNews> = () => {
   const [cryptoNews, setCryptoNews] = useState([]);
   const [FilteredNews, setFilteredNews] = useState([]);
@@ -61,6 +57,16 @@ const News: FC<CoinNews> = () => {
       });
   }, []);
 
+  const displayPersonalNews = useCallback((...input) => {
+    fetch(
+      `https://cryptonews-api.com/api/v1?tickers=${input}&items=50&token=jza2gmt5nvxo0cqjka1xjjqojwizcmlx8lpeutgl`
+    )
+      .then((res) => res.json())
+      .then((output) => console.log(output));
+  }, []);
+
+  
+
   return (
     <SafeAreaView style={styles.background}>
       <SafeAreaView style={styles.container}>
@@ -83,6 +89,7 @@ const News: FC<CoinNews> = () => {
           setCryptoNews={setCryptoNews}
           cryptoNews={cryptoNews}
           displayCryptoData={displayCryptoData}
+          displayPersonalNews={displayPersonalNews}
           displayNFTData={displayNFTData}
           input={input}
         />

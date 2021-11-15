@@ -10,6 +10,7 @@ const NewsSearch = ({ input, filterNews }) => {
         placeholder='Search...'
         placeholderTextColor='#fff'
         style={styles.input}
+        keyboardAppearance='dark'
       />
     </SafeAreaView>
   );

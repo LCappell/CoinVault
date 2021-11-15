@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
   StyleSheet,
@@ -8,12 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-const TopNav = ({
-  displayNFTData,
-  displayCryptoData,
-
-  setCryptoNews,
-}) => {
+const TopNav = ({ displayNFTData, displayCryptoData }) => {
   return (
     <SafeAreaView style={styles.container}>
       <TouchableOpacity onPress={displayCryptoData}>

@@ -7,6 +7,8 @@ import {
 } from 'react-native';
 import TopNav from './TopNav';
 import NewsItem from './NewsItem';
+import { RootState } from '../../redux/Store';
+import { useSelector } from 'react-redux';
 
 const NewsList = ({
   cryptoNews,
@@ -15,6 +17,7 @@ const NewsList = ({
   displayNFTData,
   displayCryptoData,
   setCryptoNews,
+  displayPersonalNews,
   getData,
 }) => {
   const [refreshing, setRefreshing] = useState(false);
@@ -32,12 +35,19 @@ const NewsList = ({
     }
   }, [refreshing]);
 
+  const coinAmount = useSelector(
+    (state: RootState) => state.CoinInputData.amount
+  );
+
+  
+
   return (
     <SafeAreaView>
       <TopNav
         displayNFTData={displayNFTData}
         displayCryptoData={displayCryptoData}
         setCryptoNews={setCryptoNews}
+        displayPersonalNews={displayPersonalNews}
       />
       <FlatList
         data={input.length > 0 ? FilteredNews : cryptoNews}

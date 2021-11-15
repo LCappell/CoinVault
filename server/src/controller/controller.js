@@ -30,7 +30,6 @@ const getData = async (req, res) => {
 
 const deleteData = async (req, res) => {
   const { id } = req.params;
-
   try {
     await coinModelData.findByIdAndRemove(id);
     res.json(id).status(200);
