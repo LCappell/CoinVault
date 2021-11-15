@@ -79,20 +79,20 @@ const BottomSheet = ({ selectCoin, sparkLine }) => {
           <Image source={{ uri: selectCoin.image }} style={styles.image} />
         </View>
         <View style={styles.coinInfo}>
-          <View>
+          <View style={styles.border}>
             <Text style={styles.listItem}>
-              Market Cap: {selectCoin.market_cap}
+              Market Cap: ${selectCoin.market_cap}
             </Text>
           </View>
-          <View>
-            <Text style={styles.listItem}> ATH: {selectCoin.ath} </Text>
+          <View style={styles.border}>
+            <Text style={styles.listItem}> ATH: ${selectCoin.ath} </Text>
           </View>
-          <View>
+          <View style={styles.border}>
             <Text style={styles.listItem}>
               ATH Date: {moment(selectCoin.ath_date).format('MMMM Do YYYY')}{' '}
             </Text>
           </View>
-          <View>
+          <View style={styles.border}>
             <Text style={styles.listItem}>
               Circulating Supply: {selectCoin.circulating_supply}
             </Text>
@@ -135,12 +135,15 @@ const styles = StyleSheet.create({
   dynamicData: {
     color: 'white',
     backgroundColor: '#60A3D9',
+
     borderRadius: 50,
     width: 150,
     textAlign: 'center',
     letterSpacing: 2,
     fontWeight: 'bold',
     padding: 15,
+    marginBottom: 15,
+    marginHorizontal: 20,
   },
 
   prices: {
@@ -149,6 +152,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     color: '#fff',
+  },
+
+  border: {
+    borderBottomColor: '#fff',
+    borderBottomWidth: 2,
   },
 
   coinInfo: {
@@ -173,14 +181,16 @@ const styles = StyleSheet.create({
   },
   listItem: {
     margin: 15,
-    fontFamily: 'Chivo_700Bold',
-    fontWeight: 'bold',
-    color: '#000',
-    borderWidth: 2,
+    fontFamily: 'Chivo_400Regular',
+    letterSpacing: 0.5,
+    fontSize: 14,
+    color: '#fff',
+    borderBottomWidth: 2,
+    borderBottomColor: 'white',
     width: 300,
     textAlign: 'center',
     padding: 8,
-    backgroundColor: '#BFD7ED',
+    // backgroundColor: '#cdebf9',
     overflow: 'hidden',
     borderRadius: 15,
   },
