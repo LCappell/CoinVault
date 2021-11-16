@@ -13,10 +13,10 @@ import { auth } from '../../firebase';
 import CoinPie from './CoinPie';
 import Header from './Header';
 import UserInput from './UserInput';
+import UserInputNav from './UserInputNav';
 
 import TabIcon from '../../components/TabIcon';
 import Icons from '../../constants/Icons';
-import TabIcon2 from '../../components/TabIcon2';
 import TabIcon3 from '../TabIcon3';
 import Assets from './Assets';
 
@@ -45,27 +45,15 @@ const Main = () => {
       .catch((err) => console.log(err));
   };
 
-  const Button = React.memo(() => {
-    return (
-      <button
-        onPress={() => {
-          setShowInput(!showInput);
-          setisClicked(!isClicked);
-        }}
-      >
-        Press me
-      </button>
-    );
-  });
-
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView behavior='position'>
         <SafeAreaView style={styles.coinDataArea}>
           <Header formatEmail={formatEmail} />
           <CoinPie coinValues={coinValues} />
+          <UserInputNav coinValues={coinValues} />
 
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={styles.addPosition}
             onPress={() => {
               setShowInput(!showInput);
@@ -79,12 +67,12 @@ const Main = () => {
               </View>
             ) : (
               <View style={styles.row}>
-              <Text style={styles.asset}>Transactions</Text>
-              <TabIcon3 icon={Icons.money} />
+                <Text style={styles.asset}>Transactions</Text>
+                <TabIcon3 icon={Icons.money} />
               </View>
             )}
           </TouchableOpacity>
-          {!showInput ? <UserInput coinValues={coinValues} /> : <Assets />}
+          {!showInput ? <UserInput coinValues={coinValues} /> : <Assets />} */}
         </SafeAreaView>
       </KeyboardAvoidingView>
       <TouchableOpacity style={styles.signOutArea} onPress={handleSignOut}>
@@ -110,7 +98,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#000',
   },
-  row: {flexDirection: 'row'},
+  row: { flexDirection: 'row' },
 
   addText: {
     color: '#fff',
@@ -122,7 +110,7 @@ const styles = StyleSheet.create({
     opacity: 0.7,
     marginTop: 45,
     paddingLeft: 10,
-    marginRight: 10
+    marginRight: 10,
   },
 
   asset: {
@@ -134,7 +122,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     opacity: 0.5,
     marginTop: 45,
-    marginRight: 10
+    marginRight: 10,
   },
 
   coinDataArea: {

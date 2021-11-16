@@ -12,8 +12,8 @@ const TabIcon3 = ({ icon }) => {
           tintColor: '#89cff0',
           opacity: 0.8,
           position: 'absolute',
-          bottom: 0,
-          left: 20
+          bottom: -10,
+          left: 200
         }}
         source={icon}
       />

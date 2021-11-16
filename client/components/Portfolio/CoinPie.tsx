@@ -34,15 +34,15 @@ const CoinPie = ({ coinValues }) => {
 
       const timesBy =
         userCoin === 'BTC'
-          ? 14
+          ? 23
           : userCoin === 'ETH'
-          ? 6
+          ? 5
           : userCoin === 'SOL'
-          ? 4
+          ? 2
           : userCoin === 'DOGE'
           ? 0.14
           : userCoin === 'ADA'
-          ? 1.5
+          ? 1
           : 1;
 
       myData = {};

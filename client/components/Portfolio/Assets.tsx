@@ -49,8 +49,8 @@ export default Assets;
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: 500,
-    left: 10,
+    top: 10,
+
     width: '100%',
   },
   flatListItem: {
