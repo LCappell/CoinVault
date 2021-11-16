@@ -8,6 +8,7 @@ const add = require('../assets/icons/icons8-add-100.png');
 const removeItem = require('../assets/icons/icons8-delete-120.png');
 const addCoin = require('../assets/icons/icons8-add-96.png');
 const money = require('../assets/icons/money.png');
+const logoutcolor = require('../assets/icons/icons8-logout-96.png');
 
 export default {
   stocks,
@@ -20,4 +21,5 @@ export default {
   removeItem,
   addCoin,
   money,
+  logoutcolor,
 };

@@ -35,7 +35,7 @@ const Header = ({ formatEmail }) => {
           progress={progress}
           source={bitcoin}
           style={styles.lottie}
-          speed={0.1}
+          speed={0.2}
           autoPlay
           loop
         />

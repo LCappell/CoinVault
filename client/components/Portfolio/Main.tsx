@@ -16,6 +16,8 @@ import UserInput from './UserInput';
 import UserInputNav from './UserInputNav';
 
 import TabIcon from '../../components/TabIcon';
+import TabIcon5 from '../../components/TabIcon5';
+
 import Icons from '../../constants/Icons';
 import TabIcon3 from '../TabIcon3';
 import Assets from './Assets';
@@ -76,7 +78,7 @@ const Main = () => {
         </SafeAreaView>
       </KeyboardAvoidingView>
       <TouchableOpacity style={styles.signOutArea} onPress={handleSignOut}>
-        <TabIcon icon={Icons.logout} />
+        <TabIcon5 icon={Icons.logoutcolor} />
       </TouchableOpacity>
     </SafeAreaView>
   );

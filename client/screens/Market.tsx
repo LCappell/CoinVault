@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
     padding: 10,
     bottom: 20,
     backgroundColor: '#080808',
+
   },
 
   searchBar: {

@@ -65,8 +65,6 @@ const News: FC<CoinNews> = () => {
       .then((output) => console.log(output));
   }, []);
 
-  
-
   return (
     <SafeAreaView style={styles.background}>
       <SafeAreaView style={styles.container}>
@@ -104,7 +102,7 @@ const styles = StyleSheet.create({
   background: { backgroundColor: '#080808', height: 1000 },
   container: {
     padding: 10,
-    height: 700,
+    height: 600,
     backgroundColor: '#080808',
   },
   searchBar: {
@@ -125,7 +123,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#BFD7ED',
     borderBottomWidth: 2,
     paddingLeft: 20,
-    padding: 12,
+    padding: 20,
     marginBottom: 1,
   },
 });

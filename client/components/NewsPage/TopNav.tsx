@@ -9,15 +9,33 @@ import {
 } from 'react-native';
 
 const TopNav = ({ displayNFTData, displayCryptoData }) => {
+  const [isNft, setisNft] = useState(false);
+  const [isCrypto, setisCrypto] = useState(true);
+
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity onPress={displayCryptoData}>
-        <Text style={styles.NavItem}>Crypto</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={displayNFTData}>
-        <Text style={styles.NavItem}>NFT</Text>
-      </TouchableOpacity>
+      <View style={isCrypto ? styles.Crypto : styles.NavItem}>
+        <TouchableOpacity
+          onPress={() => {
+            displayCryptoData();
+            setisCrypto(!isCrypto);
+            setisNft(!isNft);
+          }}
+        >
+          <Text style={styles.NavItem}>Crypto</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={isNft ? styles.nft : styles.NavItem}>
+        <TouchableOpacity
+          onPress={() => {
+            displayNFTData();
+            setisNft(!isNft);
+            setisCrypto(false);
+          }}
+        >
+          <Text style={styles.NavItem}>NFT</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
@@ -30,18 +48,46 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  NavItem: {
-    padding: 12,
-    backgroundColor: '#60A3D9',
-    color: '#fff',
-    borderRadius: 15,
-    overflow: 'hidden',
-    width: 150,
-    textAlign: 'center',
-    marginHorizontal: 20,
-    marginVertical: 15,
+  pressed: {},
 
-    fontFamily: 'Chivo_700Bold',
-    letterSpacing: 1,
+  Crypto: {
+    borderBottomWidth: 3,
+    borderBottomColor: '#b6e1f6',
+    marginHorizontal: 10,
+
+    color: '#fff',
+    width: 130,
+    fontSize: 18,
+    textAlign: 'center',
+    marginVertical: 15,
+    fontFamily: 'Chivo_400Regular',
+    letterSpacing: 2,
+  },
+
+  nft: {
+    borderBottomWidth: 3,
+    borderBottomColor: '#b6e1f6',
+    marginHorizontal: 10,
+    color: '#fff',
+    width: 130,
+    fontSize: 18,
+    textAlign: 'center',
+    marginVertical: 15,
+    fontFamily: 'Chivo_400Regular',
+    letterSpacing: 2,
+  },
+
+  NavItem: {
+    color: '#fff',
+    borderBottomColor: '#000',
+    borderBottomWidth: 0,
+    overflow: 'hidden',
+    width: 130,
+    fontSize: 18,
+    textAlign: 'center',
+    marginHorizontal: 10,
+    marginVertical: 15,
+    fontFamily: 'Chivo_400Regular',
+    letterSpacing: 2,
   },
 });

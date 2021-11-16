@@ -159,27 +159,26 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 80,
     left: -190,
-    top: -10
+    top: -10,
   },
 
   logoArea: {
     justifyContent: 'center',
     alignItems: 'center',
-
     paddingBottom: 70,
   },
 
   userInput: {
-    padding: 25,
-    borderWidth: 2,
-    borderColor: '#BFD7ED',
+    paddingVertical: 20,
+    paddingLeft: 20,
+    borderBottomColor: '#fff',
+    borderBottomWidth: 3,
     width: 300,
     letterSpacing: 2,
     color: '#fff',
     fontSize: 18,
     fontFamily: 'Chivo_400Regular',
     margin: 20,
-    borderRadius: 20,
   },
 
   text: {
