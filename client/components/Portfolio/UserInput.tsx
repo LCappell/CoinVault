@@ -24,6 +24,8 @@ const UserInput = ({ coinValues }) => {
   const [boughtPrice, setBoughtPrice] = useState('');
   const [userAmount, setUserAmount] = useState('');
   const [userCoin, setUserCoin] = useState('');
+  const [show, setshow] = useState(false);
+  const [selectDate, setselectDate] = useState(true);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -31,7 +33,6 @@ const UserInput = ({ coinValues }) => {
   };
 
   const addCoinData = () => {
-    console.log(`Adding ${userAmount}`);
     dispatch(
       saveCoinData({
         userAmount: userAmount,
@@ -55,7 +56,12 @@ const UserInput = ({ coinValues }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          setselectDate(true);
+          Keyboard.dismiss;
+        }}
+      >
         <View style={styles.row}>
           <TextInput
             placeholder='Input a coin...'
@@ -65,16 +71,32 @@ const UserInput = ({ coinValues }) => {
             onChangeText={(val) => setUserCoin(val)}
             keyboardAppearance='dark'
           />
-          <View style={styles.dateArea}>
-            <DateTimePicker
-              testID='dateTimePicker'
-              value={date}
-              is24Hour={true}
-              mode='date'
-              display='default'
-              onChange={onChange}
-              style={styles.datepicker}
-            />
+          {selectDate && (
+            <View style={styles.dateArea}>
+              <TouchableOpacity
+                onPress={() => {
+                  setshow(true);
+                  setselectDate(false);
+                }}
+              >
+                <Text style={styles.DateInput}>Select Date</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+
+          <View>
+            {show && (
+              <DateTimePicker
+                testID='dateTimePicker'
+                value={date}
+                is24Hour={true}
+                mode='date'
+                display='default'
+                onChange={onChange}
+                style={styles.datepicker}
+                textColor='red'
+              />
+            )}
           </View>
 
           <TextInput
@@ -115,17 +137,19 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  dateArea: {},
-
+  dateArea: {
+    borderBottomWidth: 3,
+    borderBottomColor: '#fff',
+    marginBottom: 15,
+    marginLeft: 20,
+  },
   selector: {
     width: 170,
     height: 50,
     fontSize: 18,
-
     paddingHorizontal: 12,
-    borderWidth: 2,
-    borderColor: '#cdebf9',
-    borderRadius: 8,
+    borderBottomColor: '#fff',
+    borderBottomWidth: 3,
     color: '#cdebf9',
     fontFamily: 'Chivo_400Regular',
     paddingRight: 30,
@@ -163,11 +187,13 @@ const styles = StyleSheet.create({
   },
 
   datepicker: {
-    borderWidth: 2,
-    borderColor: '#cdebf9',
+    // borderWidth: 2,
+    // borderColor: '#cdebf9',
+    borderBottomWidth: 3,
+    borderBottomColor: '#fff',
     marginVertical: 15,
     borderRadius: 15,
-
+    color: 'pink',
     backgroundColor: 'grey',
     overflow: 'hidden',
     width: 150,
@@ -187,15 +213,28 @@ const styles = StyleSheet.create({
     width: 170,
     height: 50,
     fontFamily: 'Chivo_400Regular',
-
     fontSize: 20,
     paddingHorizontal: 12,
     borderWidth: 2,
-    borderColor: '#cdebf9',
-    borderRadius: 8,
+    borderBottomWidth: 3,
+    borderBottomColor: '#fff',
     color: '#cdebf9',
     paddingRight: 30,
     marginVertical: 15,
+    marginHorizontal: 10,
+  },
+
+  DateInput: {
+    width: 170,
+    height: 50,
+    fontFamily: 'Chivo_400Regular',
+    fontSize: 20,
+    paddingHorizontal: 12,
+    paddingTop: 25,
+    borderWidth: 2,
+    borderBottomWidth: 3,
+    borderBottomColor: '#fff',
+    color: '#cdebf9',
     marginHorizontal: 10,
   },
 });
