@@ -40,8 +40,8 @@ const UserInputNav = ({ coinValues }) => {
             }}
           >
             <View style={styles.row}>
-              <Text style={styles.asset}>Transactions</Text>
-              <TabIcon3 icon={Icons.money} />
+              <Text style={styles.asset}>View Transactions...</Text>
+              {/* <TabIcon3 icon={Icons.money} /> */}
             </View>
           </TouchableOpacity>
         )}
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
     opacity: 0.5,
+    left: 40,
     // marginTop: 45,
     // marginRight: 10,
   },
