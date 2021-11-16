@@ -3,23 +3,28 @@ import {
   StyleSheet,
   Text,
   View,
+  Keyboard,
   TextInput,
   SafeAreaView,
   Button,
 } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const CoinSearch = ({ input, filterCoins }) => {
   return (
-    <SafeAreaView style={styles.searchContainer}>
-      <TextInput
-        value={input}
-        onChangeText={filterCoins}
-        placeholder='Search...'
-        placeholderTextColor='#fff'
-        style={styles.input}
-        keyboardAppearance='dark'
-      />
-    </SafeAreaView>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <SafeAreaView style={styles.searchContainer}>
+        <TextInput
+          value={input}
+          onChangeText={filterCoins}
+          placeholder='Search...'
+          placeholderTextColor='#fff'
+          style={styles.input}
+          keyboardAppearance='dark'
+          clearButtonMode='always'
+        />
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 

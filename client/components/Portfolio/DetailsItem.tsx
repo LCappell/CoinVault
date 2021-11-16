@@ -48,7 +48,7 @@ const DetailsItem = ({ item, onDelete }) => {
 
   // This will get real time data
   setTimeout(() => {
-    getAllCoinData('BTC', 'ETH', 'SOL', 'ADA');
+    getAllCoinData('BTC', 'ETH', 'SOL', 'ADA', 'SHIB');
   }, 1000);
   clearTimeout();
 

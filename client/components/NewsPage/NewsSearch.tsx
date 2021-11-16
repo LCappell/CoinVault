@@ -1,18 +1,27 @@
 import React from 'react';
-import { StyleSheet, TextInput, SafeAreaView } from 'react-native';
+import {
+  StyleSheet,
+  TextInput,
+  SafeAreaView,
+  Keyboard,
+  TouchableWithoutFeedback,
+} from 'react-native';
 
 const NewsSearch = ({ input, filterNews }) => {
   return (
-    <SafeAreaView style={styles.searchContainer}>
-      <TextInput
-        value={input}
-        onChangeText={filterNews}
-        placeholder='Search...'
-        placeholderTextColor='#fff'
-        style={styles.input}
-        keyboardAppearance='dark'
-      />
-    </SafeAreaView>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <SafeAreaView style={styles.searchContainer}>
+        <TextInput
+          value={input}
+          onChangeText={filterNews}
+          placeholder='Search...'
+          placeholderTextColor='#fff'
+          style={styles.input}
+          keyboardAppearance='dark'
+          clearButtonMode='always'
+        />
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 

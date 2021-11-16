@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#000',
   },
-  formcontainer: { marginBottom: 20 },
+  formcontainer: { marginTop: 150 },
 
   buttonArea: {
     justifyContent: 'center',
@@ -151,7 +151,16 @@ const styles = StyleSheet.create({
 
   lottie: { width: 100, height: 250, marginBottom: 20 },
 
-  logo: { width: 400, height: 200, borderRadius: 40, marginTop: 10 },
+  logo: {
+    width: 400,
+    height: 200,
+    borderRadius: 40,
+    marginTop: 10,
+    position: 'absolute',
+    right: 80,
+    left: -190,
+    top: -10
+  },
 
   logoArea: {
     justifyContent: 'center',

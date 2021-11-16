@@ -75,11 +75,11 @@ const UserInput = ({ coinValues }) => {
             <View style={styles.dateArea}>
               <TouchableOpacity
                 onPress={() => {
-                  setshow(true);
-                  setselectDate(false);
+                  setshow(!show);
+                  setselectDate(!selectDate);
                 }}
               >
-                <Text style={styles.DateInput}>Select Date</Text>
+                <Text style={styles.DateInput}>Open date...</Text>
               </TouchableOpacity>
             </View>
           )}
@@ -135,20 +135,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
+
   },
 
   dateArea: {
     borderBottomWidth: 3,
-    borderBottomColor: '#fff',
+    borderBottomColor: '#CCE6FF',
     marginBottom: 15,
     marginLeft: 20,
+    width: 160,
   },
   selector: {
-    width: 170,
+    width: 160,
     height: 50,
     fontSize: 18,
     paddingHorizontal: 12,
-    borderBottomColor: '#fff',
+    borderBottomColor: '#CCE6FF',
     borderBottomWidth: 3,
     color: '#cdebf9',
     fontFamily: 'Chivo_400Regular',
@@ -190,9 +192,10 @@ const styles = StyleSheet.create({
     // borderWidth: 2,
     // borderColor: '#cdebf9',
     borderBottomWidth: 3,
-    borderBottomColor: '#fff',
+    borderBottomColor: '#CCE6FF',
     marginVertical: 15,
     borderRadius: 15,
+
     color: 'pink',
     backgroundColor: 'grey',
     overflow: 'hidden',
@@ -210,14 +213,15 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    width: 170,
+    width: 165,
+
     height: 50,
     fontFamily: 'Chivo_400Regular',
     fontSize: 20,
     paddingHorizontal: 12,
     borderWidth: 2,
     borderBottomWidth: 3,
-    borderBottomColor: '#fff',
+    borderBottomColor: '#CCE6FF',
     color: '#cdebf9',
     paddingRight: 30,
     marginVertical: 15,

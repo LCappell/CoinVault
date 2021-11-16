@@ -74,8 +74,8 @@ const Main = () => {
           >
             {isClicked ? (
               <View style={styles.row}>
-                <TabIcon3 icon={Icons.addCoin} />
                 <Text style={styles.addText}>Add Coins</Text>
+                <TabIcon3 icon={Icons.addCoin} />
               </View>
             ) : (
               <View style={styles.row}>
@@ -120,9 +120,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
     opacity: 0.7,
-    marginTop: 35,
+    marginTop: 45,
     paddingLeft: 10,
-    marginRight: 20
+    marginRight: 10
   },
 
   asset: {
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
     opacity: 0.5,
-    marginTop: 35,
+    marginTop: 45,
     marginRight: 10
   },
 

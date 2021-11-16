@@ -6,7 +6,7 @@ const TabIcon3 = ({ icon }) => {
     <View>
       <Image
         resizeMode='contain'
-        style={{ width: 30, height: 30, tintColor: '#89cff0', opacity: 0.5, marginTop: 40 }}
+        style={{ width: 30, height: 30, tintColor: '#89cff0', opacity: 0.5, marginTop: 50 }}
         source={icon}
       />
     </View>
