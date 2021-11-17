@@ -4,12 +4,6 @@ import { coinData } from '../../types/coinData';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
 const CoinItem = ({ coinItem, openModel }: { coinItem: coinData } | any) => {
-  let price: string = coinItem.current_price.toLocaleString('USD', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 0,
-  });
-
   return (
     <TouchableOpacity onPress={openModel}>
       <View style={styles.wrapper}>
