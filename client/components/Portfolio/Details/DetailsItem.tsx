@@ -8,8 +8,8 @@ import {
   Image,
 } from 'react-native';
 import moment from 'moment';
-import TabIcon from '../../components/TabIcon';
-import Icons from '../../constants/Icons';
+import TabIcon from '../../TabIcons/TabIcon';
+import Icons from '../../../constants/Icons';
 
 const DetailsItem = ({ item, onDelete }) => {
   const [apiCall, setApiCall] = useState([]);
@@ -104,7 +104,8 @@ const DetailsItem = ({ item, onDelete }) => {
         </Text>
 
         <Text style={[styles.coinText, { marginRight: 3 }]}>
-          <Text style={styles.textBlue}> Amount </Text>${dataNumber}
+          <Text style={styles.textBlue}> Amount </Text>$
+          {dataNumber.toLocaleString().replace(/\D/g, '')}
         </Text>
 
         <TouchableOpacity

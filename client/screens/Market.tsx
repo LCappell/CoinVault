@@ -16,8 +16,6 @@ const Market: FC = () => {
   const [filteredCoin, setFilteredCoin] = useState([]);
   const [showSearch, setShowSearch] = useState(false);
   const [isLoaded, setisLoaded] = useState(false);
-  const [nftClicked, setIsNftClicked] = useState(false);
-  const [NFTData, setNFTData] = useState([]);
 
   /**
    * Search Bar function
@@ -45,14 +43,6 @@ const Market: FC = () => {
         setisLoaded(true);
         setCoin(res.data);
         setFilteredCoin(res.data);
-      });
-  }, []);
-
-  const getNFTData = useCallback(() => {
-    fetch('https://api.opensea.io/api/v1/assets?&limit=50')
-      .then((res) => res.json())
-      .then((output) => {
-        setNFTData(output.assets);
       });
   }, []);
 
@@ -94,7 +84,6 @@ const styles = StyleSheet.create({
     padding: 10,
     bottom: 20,
     backgroundColor: '#080808',
-
   },
 
   searchBar: {

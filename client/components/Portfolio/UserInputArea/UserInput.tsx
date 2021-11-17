@@ -11,12 +11,12 @@ import {
 } from 'react-native';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { saveCoinData } from '../../redux/CoinInputData';
-import { RootState } from '../../redux/Store';
+import { saveCoinData } from '../../../redux/CoinInputData';
+import { RootState } from '../../../redux/Store';
 import { useDispatch, useSelector } from 'react-redux';
 
-import TabIcon2 from '../../components/TabIcon2';
-import Icons from '../../constants/Icons';
+import TabIcon2 from '../../TabIcons/TabIcon2';
+import Icons from '../../../constants/Icons';
 
 const UserInput = ({ coinValues }) => {
   const dispatch = useDispatch();

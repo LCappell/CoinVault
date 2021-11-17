@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { globalStyles } from '../styles/globalStyle';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import Login from './Login';
-import DetailsPage from '../components/Portfolio/DetailsPage';
+import DetailsPage from '../components/Portfolio/Details/DetailsPage';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import Main from '../components/Portfolio/Main';

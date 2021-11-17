@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -20,7 +19,8 @@ import {
   Chivo_700Bold,
   Chivo_700Bold_Italic,
 } from '@expo-google-fonts/chivo';
-import TabIcon from './components/TabIcon';
+import TabIcon from './components/TabIcons/TabIcon';
+
 import Icons from './constants/Icons';
 
 // Screen Imports

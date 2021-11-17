@@ -10,12 +10,12 @@ import {
   View,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import UserPortfolio from './UserPortfolio';
-import { RootState } from '../../redux/Store';
+import UserPortfolio from '../UserPortfolio';
+import { RootState } from '../../../redux/Store';
 import { useSelector } from 'react-redux';
 import DetailsItem from './DetailsItem';
-import TabIcon from '../TabIcon';
-import Icons from '../../constants/Icons';
+import TabIcon from '../../TabIcons/TabIcon';
+import Icons from '../../../constants/Icons';
 
 const DetailsPage = () => {
   const navigation = useNavigation();

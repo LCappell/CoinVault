@@ -2,7 +2,6 @@ import React, { FC, useRef, useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
-  Button,
   Text,
   TextInput,
   SafeAreaView,
@@ -171,7 +170,7 @@ const styles = StyleSheet.create({
   userInput: {
     paddingVertical: 20,
     paddingLeft: 20,
-    borderBottomColor: '#fff',
+    borderBottomColor: '#BFD7ED',
     borderBottomWidth: 3,
     width: 300,
     letterSpacing: 2,

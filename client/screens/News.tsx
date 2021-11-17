@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState, useEffect } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 // Component Import
 import NewsList from '../components/NewsPage/NewsList';
@@ -39,6 +39,7 @@ const News: FC<CoinNews> = () => {
   useEffect(() => {
     getData();
   }, []);
+  
   // Resets to crypto Data on click
 
   const displayCryptoData = useCallback(() => {

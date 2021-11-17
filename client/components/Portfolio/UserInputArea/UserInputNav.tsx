@@ -6,11 +6,11 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
-import Icons from '../../constants/Icons';
-import TabIcon3 from '../TabIcon3';
-import TabIcon4 from '../TabIcon4';
+import Icons from '../../../constants/Icons';
+import TabIcon3 from '../../TabIcons/TabIcon3';
+import TabIcon4 from '../../TabIcons/TabIcon4';
 
-import Assets from './Assets';
+import Assets from '../Assets/Assets';
 import UserInput from './UserInput';
 
 const UserInputNav = ({ coinValues }) => {

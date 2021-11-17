@@ -12,15 +12,15 @@ import { useNavigation } from '@react-navigation/native';
 import { auth } from '../../firebase';
 import CoinPie from './CoinPie';
 import Header from './Header';
-import UserInput from './UserInput';
-import UserInputNav from './UserInputNav';
+import UserInput from './UserInputArea/UserInput';
+import UserInputNav from './UserInputArea/UserInputNav';
 
-import TabIcon from '../../components/TabIcon';
-import TabIcon5 from '../../components/TabIcon5';
+import TabIcon from '../TabIcons/TabIcon';
+import TabIcon5 from '../TabIcons/TabIcon5';
 
 import Icons from '../../constants/Icons';
-import TabIcon3 from '../TabIcon3';
-import Assets from './Assets';
+import TabIcon3 from '../TabIcons/TabIcon3';
+import Assets from './Assets/Assets';
 
 const Main = () => {
   const [coinValues, setCoinValues] = useState([]);
