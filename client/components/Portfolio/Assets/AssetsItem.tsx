@@ -3,8 +3,6 @@ import { StyleSheet, Text, View, SafeAreaView, Image } from 'react-native';
 import moment from 'moment';
 
 const AssetsItem = ({ dbData }) => {
-  const getTotalSpent = () => {};
-
   const totalSpent = dbData.userAmount * dbData.boughtPrice;
 
   const renderImage =

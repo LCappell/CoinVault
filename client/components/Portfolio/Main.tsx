@@ -12,20 +12,15 @@ import { useNavigation } from '@react-navigation/native';
 import { auth } from '../../firebase';
 import CoinPie from './CoinPie';
 import Header from './Header';
-import UserInput from './UserInputArea/UserInput';
+
 import UserInputNav from './UserInputArea/UserInputNav';
 
-import TabIcon from '../TabIcons/TabIcon';
 import TabIcon5 from '../TabIcons/TabIcon5';
 
 import Icons from '../../constants/Icons';
-import TabIcon3 from '../TabIcons/TabIcon3';
-import Assets from './Assets/Assets';
 
 const Main = () => {
   const [coinValues, setCoinValues] = useState([]);
-  const [showInput, setShowInput] = useState(false);
-  const [isClicked, setisClicked] = useState(false);
   const formatEmail = auth.currentUser?.email.split('@')[0];
 
   useEffect(() => {
@@ -54,27 +49,6 @@ const Main = () => {
           <Header formatEmail={formatEmail} />
           <CoinPie coinValues={coinValues} />
           <UserInputNav coinValues={coinValues} />
-
-          {/* <TouchableOpacity
-            style={styles.addPosition}
-            onPress={() => {
-              setShowInput(!showInput);
-              setisClicked(!isClicked);
-            }}
-          >
-            {isClicked ? (
-              <View style={styles.row}>
-                <Text style={styles.addText}>Add Coins</Text>
-                <TabIcon3 icon={Icons.addCoin} />
-              </View>
-            ) : (
-              <View style={styles.row}>
-                <Text style={styles.asset}>Transactions</Text>
-                <TabIcon3 icon={Icons.money} />
-              </View>
-            )}
-          </TouchableOpacity>
-          {!showInput ? <UserInput coinValues={coinValues} /> : <Assets />} */}
         </SafeAreaView>
       </KeyboardAvoidingView>
       <TouchableOpacity style={styles.signOutArea} onPress={handleSignOut}>

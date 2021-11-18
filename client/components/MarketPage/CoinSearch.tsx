@@ -6,7 +6,6 @@ import {
   Keyboard,
   TextInput,
   SafeAreaView,
-  Button,
 } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
@@ -35,7 +34,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 40,
-
     marginTop: 30,
   },
 

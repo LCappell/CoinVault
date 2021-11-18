@@ -38,6 +38,7 @@ const CoinList: FC<coinData> = ({
     bottomSheetModalRef.current?.present();
   }, []);
 
+  
   const renderItem = useCallback(
     ({ item }) => (
       <CoinItem openModel={() => openModel(item)} coinItem={item} />

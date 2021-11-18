@@ -1,5 +1,4 @@
 import React from 'react';
-import { CoinNews } from '../../types/CoinNews';
 const moment = require('moment');
 import {
   StyleSheet,
@@ -58,7 +57,6 @@ const styles = StyleSheet.create({
 
   newsArticle: {
     marginHorizontal: 20,
-
     paddingVertical: 20,
     width: '90%',
     borderBottomColor: '#BFD7ED',

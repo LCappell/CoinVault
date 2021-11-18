@@ -13,7 +13,7 @@ export default MarketLoading;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'blue',
+    backgroundColor: '#000',
     flex: 1,
   },
 });

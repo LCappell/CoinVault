@@ -16,8 +16,7 @@ import {
   ChartXLabel,
 } from '@rainbow-me/animated-charts';
 
-// Format Sparkline
-
+// Format Line graph
 const formatSparkline = (numbers) => {
   const sevenDaysAgo = moment().subtract(7, 'days').unix();
   let formattedSparkline = numbers.map((item, index) => {
@@ -85,7 +84,10 @@ const BottomSheet = ({ selectCoin, sparkLine }) => {
             </Text>
           </View>
           <View style={styles.border}>
-            <Text style={styles.listItem}> ATH: ${selectCoin.ath.toLocaleString()} </Text>
+            <Text style={styles.listItem}>
+              {' '}
+              ATH: ${selectCoin.ath.toLocaleString()}{' '}
+            </Text>
           </View>
           <View style={styles.border}>
             <Text style={styles.listItem}>
@@ -191,8 +193,6 @@ const styles = StyleSheet.create({
     width: 300,
     textAlign: 'center',
     padding: 8,
-    // backgroundColor: '#cdebf9',
     overflow: 'hidden',
-
   },
 });

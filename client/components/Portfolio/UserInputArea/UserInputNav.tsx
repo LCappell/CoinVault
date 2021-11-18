@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icons from '../../../constants/Icons';
-import TabIcon3 from '../../TabIcons/TabIcon3';
+
 import TabIcon4 from '../../TabIcons/TabIcon4';
 
 import Assets from '../Assets/Assets';
@@ -24,7 +24,6 @@ const UserInputNav = ({ coinValues }) => {
             onPress={() => {
               setisClicked(!isClicked);
               setShowInput(!showInput);
-              console.log('hey');
             }}
           >
             <View style={styles.row}>
@@ -41,7 +40,6 @@ const UserInputNav = ({ coinValues }) => {
           >
             <View style={styles.row}>
               <Text style={styles.asset}>View Transactions...</Text>
-              {/* <TabIcon3 icon={Icons.money} /> */}
             </View>
           </TouchableOpacity>
         )}
@@ -86,7 +84,5 @@ const styles = StyleSheet.create({
     fontSize: 18,
     opacity: 0.5,
     left: 40,
-    // marginTop: 45,
-    // marginRight: 10,
   },
 });

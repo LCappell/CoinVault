@@ -71,9 +71,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
 
-  coinInfo: {
-    // width: 95,
-  },
+  coinInfo: {},
 
   wrapper: {
     justifyContent: 'space-between',
