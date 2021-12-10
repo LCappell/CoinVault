@@ -1,6 +1,10 @@
 <h1> CoinVault </h1>
 A cryptocurrency and NFT portfolio app built with React Native.
 
+
+<img width="347" alt="Screenshot 2021-12-10 at 13 53 20" src="https://user-images.githubusercontent.com/69793445/145603331-b855418a-1afb-4cdb-9f67-cf0f70b4e342.png">
+
+
 <h2> Get Started </h2>
 
 - Fork the repo.
