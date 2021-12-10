@@ -1,6 +1,6 @@
 
 <h1>CoinVault </h1>
-<h2>A cryptocurrency and NFT portfolio app built with React Native.</h2>
+<h2>A modern cryptocurrency and NFT portfolio app built with React Native.</h2>
 <br/>
 
 <p float="left">
