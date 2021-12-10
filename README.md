@@ -21,6 +21,7 @@ https://user-images.githubusercontent.com/69793445/145606870-88e02486-0ceb-4901-
 <h2> Get Started 👍🏼 </h2>
 
 - Fork the repo.
+- ``` git clone https://github.com/LCappell/CoinVault.git ```
 - From the root directory, ``` run cd ./server ; npm i ; npm start  ```
 - In a separate terminal, from root directory run ``` cd ./client ; npm i ; npm start ```
 - With mongodb installed, run brew services start mongodb-community
