@@ -1,7 +1,5 @@
-<h1> CoinVault </h1>
-<img width="620" height="200" alt="CoinImage" src="https://user-images.githubusercontent.com/69793445/145606497-2218d4a2-fdda-43c8-954e-952721730353.png">
 
-
+<img width="620" height="100" alt="CoinImage" src="https://user-images.githubusercontent.com/69793445/145606497-2218d4a2-fdda-43c8-954e-952721730353.png">
 
 <h2>A cryptocurrency and NFT portfolio app built with React Native.</h2>
 <br/>
