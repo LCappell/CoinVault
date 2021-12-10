@@ -18,7 +18,7 @@ https://user-images.githubusercontent.com/69793445/145606870-88e02486-0ceb-4901-
 
 
 
-<h2> Get Started </h2>
+<h2> Get Started 👍🏼 </h2>
 
 - Fork the repo.
 - From the roor directory, run cd ./server ; npm i ; npm start 
@@ -27,7 +27,7 @@ https://user-images.githubusercontent.com/69793445/145606870-88e02486-0ceb-4901-
 - You're all set, load the app in your browser on http://localhost:3000/
 
 
-<h3> Tech Stack </h3>
+<h3> Tech Stack 💻</h3>
 - TypeScript
 - React Native
 - Express
