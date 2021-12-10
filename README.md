@@ -19,7 +19,7 @@
 <h2> Get Started </h2>
 
 - Fork the repo.
-- From the client directory, run cd ./server ; npm i ; npm start 
+- From the roor directory, run cd ./server ; npm i ; npm start 
 - In a separate terminal, from root directory run cd ./client ; npm i ; npm start
 - With mongodb installed, run brew services start mongodb-community
 - You're all set, load the app in your browser on http://localhost:3000/
