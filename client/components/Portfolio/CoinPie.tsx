@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 const db_url = 'http://10.10.22.28:4000';
 
 const CoinPie = ({ coinValues }) => {
+  
   const coinAmount = useSelector(
     (state: RootState) => state.CoinInputData.amount
   );
