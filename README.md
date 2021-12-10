@@ -10,3 +10,11 @@ A cryptocurrency and NFT portfolio app built with React Native.
 - You're all set, load the app in your browser on http://localhost:3000/
 
 
+<h3> Tech Stack </h3>
+- TypeScript
+- React Native
+- Express
+- MongoDB
+- Firebase
+
+
