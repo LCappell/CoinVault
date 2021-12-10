@@ -1,5 +1,5 @@
 <h1> CoinVault </h1>
-<img width="1420" alt="CoinImage" src="https://user-images.githubusercontent.com/69793445/145606497-2218d4a2-fdda-43c8-954e-952721730353.png">
+<img width="420" height="300" alt="CoinImage" src="https://user-images.githubusercontent.com/69793445/145606497-2218d4a2-fdda-43c8-954e-952721730353.png">
 
 
 
